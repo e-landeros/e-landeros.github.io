@@ -1,0 +1,46 @@
+/* Browser always apply some elements to the rendering, this eliminates that wirh margin and padding 0*/
+*,
+*::after,
+*::before {
+    margin:0;
+    padding:0;
+    /* Changes box model so borders and padding are no longer added to total width and total height specified */
+    /* box-sizing: border-box; */
+    /* set to inherit from body  */
+    box-sizing: inherit;
+}
+/* SET root font size to use rem units for breakpoint adjustments 
+    SET to 10px so we know 1 rem == 10px
+    but takes away from user ability to set font-size
+    so use 62.5% to allow user adjustments
+*/
+html {
+    font-size: 62.5%;
+
+//set rems in each media size 
+    @include respond(tab-land){
+        font-size: 56.25%; //1rem = 9px, 9/16 = 56.25%
+    }
+    @include respond(tab-port){
+        font-size: 50%; //1rem = 8px, 8/16 = 50%
+    }
+    @include respond(big-dektop){
+        font-size: 75%;    //1rem = 12px, 12/16 = 75%
+    }
+}
+body {
+    /* Fonts are inherited by children */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* font-size: 16px; */
+    line-height: 1.7;
+    color: $color-grey-dark;
+    /* white line around the hole page. not being inherited by other elements */
+    padding: 3rem;
+    box-sizing: border-box;
+    /* white line around the hole page. not being inherited by other elements */
+    padding: 3rem;
+    @include respond(tab-port){
+        padding:0;
+    }
+}

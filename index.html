@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Fabian Landeros</title>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900">
+        <link rel="stylesheet" href="css/open-iconic/font/css/open-iconic.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="img/favicon.png" type="image/favicon.png">
+    </head>
+    <body>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button" id="labeltoggle">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="#about" class="navigation__link" id="alabel"><span>01</span>About</a></li>
+                    <li class="navigation__item"><a href="#skills" class="navigation__link"><span>02</span>Skills</a></li>
+                    <li class="navigation__item"><a href="#projects" class="navigation__link"><span>03</span>Projects</a></li>
+                    <li class="navigation__item"><a href="#contact" class="navigation__link"><span>04</span>Contact</a></li>
+                    <li class="navigation__item"><a target="_blank" href="img/dev_landeros.pdf" class="navigation__link"><span>05</span>Download Resume</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    
+        <header class="header">
+
+            <div class="header__text-box">
+                <h1 class="heading-primary">
+                    <span class="heading-primary--main">Hello</span>
+                    <span class="heading-primary--sub">I'm Fabian <br> Welcome to my site</span>
+                </h1>
+                <a href="#about" class="btn btn--white btn--animated">Learn about me</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="section-about" id="about">
+                <div class="u-center-text u-margin-bottom-big">
+                    <h2 class="heading-secondary">
+                    I turn coffee into code 
+                    </h2>
+                </div> 
+
+                <div class="row">
+                <div class="col-1-of-2">
+                    <h3 class="heading-tertiary u-margin-bottom-small ">Sometimes it even works like I want it to.</h3>
+                    <p class="paragraph">
+                        I am a Pythonista. I love programming in Python I use Django for web apps, Flask for simple API's. Numpy, Pandas and Tensorflow for Machine Learning
+                         and some Plotly, Bokeh, Seaborn for visualizations and dashboards. The python libs for Gui's suck so I stick to HTML, JS, and CSS/Sass. 
+                         I've built on other frameworks like MeteorJs and Angular2 before I discovered Python and JS got out of control.
+                         This site is a static build I borrowed from one of my other projects. It has a custom npm build process to compile Sass, concat external statics, & compress them.
+                         I used the BEM methodology and the Sass 7 in 1 pattern, It has its own custom grid layout and custom media query manager.
+                        Be sure to check out my data science projects on <a class="btn-text" target="_blank" href="https://github.com/e-landeros">Github</a>
+
+                    </p>
+
+                    <h3 class="heading-tertiary u-margin-bottom-small ">But Wait there's more!</h3>
+                    <p class="paragraph">
+                        I graduated from Harvard with a Bachelors in Economics with a 3.33 gpa. I've spent a rediculous amount of time building models and performing statistical analysis. 
+                        I have a lot of experience managing remote and high performing teams. Most recently, 
+                        I managed the Southern California Tranportation and Engineering Departments for Amtrak.
+                        My team was 200+ with an annual budget of $40M. I worked closely with dozens of local and state officials to optimize the public transportation system. 
+                        And I built some awesome scripts to track financials and optimize the workforce schedules.
+                        I really enjoy solving backend problems I use Docker with compose for local development and Kubernetes orchestration for Production.
+                        I am currently learning GOlang and working on a food ordering app for the Mexican market. <br>
+                        Connect with me on <a href="https://www.linkedin.com/in/flanderos/" target="_blank" class="btn-text">Linkedin</a>
+                    </p>
+                </div>
+                <div class="col-1-of-2">
+                    <div class="composition"> 
+                        <img src="img/code_portfolio.png" alt="This Site BEM example" class="composition__photo composition__photo--p1">
+                        <img src="img/portfolio_optimization.png" alt="Markowitzc portfolio optimization" class="composition__photo composition__photo--p2">
+                        <img src="img/django_models.png" alt="Clean code on django models for food app" class="composition__photo composition__photo--p3">
+                    </div>
+                </div>
+            </div>
+            </section>
+<!-- <img src="css/open-iconic/svg/briefcase.svg" alt=""> -->
+            <section class="section-features" id="skills">
+                <div class="row">
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="oi feature-box__icon" data-glyph="terminal" title="terminal" aria-hidden="true"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Versatile</h3>
+                            <p class="feature-box__text">
+                                I am can adapt to your stack quickly. I've built on nginx, gunicorn, node, caddy, uwsgi, php, and ubuntu. 
+                                Along with dozens of build tools like docker, virtual box, lxc, juju, flannel.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="oi feature-box__icon" data-glyph="tablet" title="tablet" aria-hidden="true"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Responsive Designs</h3>
+                            <p class="feature-box__text">
+                            Design is not my forte but this site is desktop first with a custom grid and a custom media manager to be beautiful on all viewport sizes.
+                             The menu button is also really cool.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="oi feature-box__icon" data-glyph="cloudy" title="cloudy" aria-hidden="true"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Cloud Technologies</h3>
+                            <p class="feature-box__text">
+                            Ive launched apps on various cloud infrastructures including AWS and GCP but also Firebase, Heroku, Digital Ocean, Cpanel based and several statics including github pages and netlify.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="oi feature-box__icon" data-glyph="spreadsheet" title="spreadsheet" aria-hidden="true"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Databases</h3>
+                            <p class="feature-box__text">
+                            I love Django's Object relational mapper and SQLAlchemy and I write SQL for data cleaning. 
+                            Postgres is my go to for production and I've used MariaDB with projects like ERPnext. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                    
+            </section>
+
+            <section class="section-tours" id="projects">
+                <div class="u-center-text u-margin-bottom-big">
+                    <h2 class="heading-secondary">
+                    Some Cool Projects
+                    </h2>
+                </div> 
+
+                <div class="row">
+                    <div class="col-1-of-3">
+                        <div class="card">
+                            <div class="card__side card__side--front ">
+                                <div class="card__picture card__picture--1">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--1">Hambre App</span>      
+                                </h4>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>Django Backend</li>
+                                        <li>Django Rest API</li>
+                                        <li>Swift Mobile App</li>
+                                        <li>Django BootStrap4</li>
+                                        <li>Social Auth User Login</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card__side card__side--back card__side--back-1">
+                                <div class="card__cta">
+                                    <div class="card__info-box">
+                                        <p class="card__info-title">Hambre App</p>
+                                        <p class="card__info-text">Hambre is django application created for the mexican market.
+                                            The Desktop platform allows restaurant to sign up and create menus. It is connected to  
+                                            2 mobile apps (in production) by REST api. One app allows for delivery drivers to accept delivery orders.
+                                            The other is for customers to request food delivery and provide payment.
+                                        </p>
+                                    </div>
+                                    <a href="https://github.com/e-landeros/hambre_app" target="_blank" class="btn btn--white">Check out Code</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-3">
+                        <div class="card">
+                            <div class="card__side card__side--front ">
+                                <div class="card__picture card__picture--2">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--2">Real Estate</span>      
+                                </h4>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>Django Backend</li>
+                                        <li>Custom Django Admin</li>
+                                        <li>User Accounts & Auth</li>
+                                        <li>Multiple Sales Rep</li>
+                                        <li>Fully Responsive Design</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card__side card__side--back card__side--back-2">
+                                <div class="card__cta">
+                                    <div class="card__info-box">
+                                        <p class="card__info-title">Valle Real Estate</p>
+                                        <p class="card__info-text">
+                                            This is a Django App for a real estate company. 
+                                            It's main use is to manage listings for a real estate agency.
+                                            Coolest feature is the search and filtering tool on the homepage.  
+                                            It also has a custom Admin which allows uploading listings a breeze. 
+                                            The front end is a responsive bootstrap template, Jinja2 templating language allows for 
+                                            listing to be filtered and searched directly from the database.
+                                            It also allows for users to create accounts and track listing inquiries. 
+                                        </p>
+                                    </div>
+                                    <a href="https://github.com/e-landeros/valle_real_estate" target="_blank" class="btn btn--white">Check out Code</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-1-of-3">
+                        <div class="card">
+                            <div class="card__side card__side--front ">
+                                <div class="card__picture card__picture--3">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--3">Flask Blog</span>      
+                                </h4>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>Flask Blue Prints Model</li>
+                                        <li>Full User Auth</li>
+                                        <li>Custom Error Handling</li>
+                                        <li>User Profile Customization</li>
+                                        <li>SQL Alchemy ORM</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card__side card__side--back card__side--back-3">
+                                <div class="card__cta">
+                                    <div class="card__info-box">
+                                        <p class="card__info-title">Flask Blog Blueprint</p>
+                                        <p class="card__info-text">This is a plugable Flask Application which allows 
+                                        developers to add a full featured blog backend to their existing app. It has full user 
+                                        creation and customization support. The frontend was not fully developed it uses Bootstrap as a 
+                                        placeholder. It uses flask wtf and Flask Forms package to create user forms.
+                                        </p>
+                                    </div>
+                                    <a href="https://github.com/e-landeros/FlaskBlog" target="_blank" class="btn btn--white">Check out Code</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="u-center-text u-margin-top-huge">
+                 <a href="#contact" class="btn btn--green">Contact Me</a> 
+                </div>
+
+            </section>
+
+            <section class="section-stories">
+                <div class="bg-video">
+                    <video class="bg-video__content" autoplay muted loop>
+                        <source src="img/city.mp4" type="video/mp4">
+                        <source src="img/city.webm" type="video/webm">
+                            Your Browser is not supported!
+                    </video>
+                </div>
+                <div class="u-center-text u-margin-bottom-big">
+                    <h2 class="heading-secondary">
+                    Check Out What People Are Saying
+                    </h2>
+                </div>
+                
+                <div class="row">
+                    <div class="story">
+                        <figure class="story__shape">
+                            <img src="img/mari.jpg" alt="wife testimonial" class="story__img">
+                            <figcaption class="story__caption">The Wife</figcaption>
+                        </figure>
+                        <div class="story__text">
+                            <h3 class="heading-tertiary u-margin-bottom-small">Awesome!!!</h3>
+                            <p>
+                                That is a really cool project . . . . <br>
+                                Do you mind taking out the trash?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                        <div class="story">
+                            <figure class="story__shape">
+                                <img src="img/johnny.jpg" alt="my brother Johnny" class="story__img">
+                                <figcaption class="story__caption">Johnny</figcaption>
+                            </figure>
+                            <div class="story__text">
+                                <h3 class="heading-tertiary u-margin-bottom-small">Amazing !!</h3>
+                                <p>
+                                    It is just amazing what computers can do now adays . . . . <br>
+                                    I have no idea what you're talking about.
+                                </p>
+                            </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="section-book" id="contact">
+                <div class="row">
+                    <div class="book">
+                        <div class="book__form">
+                            <form method="POST" action="https://formspree.io/landerosedgard@gmail.com" class="form" enctype="text/plain">
+                                    <div class="u-margin-bottom-medium">
+                                    <h2 class="heading-secondary">Contact Me.</h2>
+                                </div> 
+                                <div class="form__group">
+                                    <input name="fullname" type="text" class="form__input" placeholder="Full Name" id="name" required>
+                                    <label for="name" class="form__label">Full Name</label>
+                                </div>
+
+                                <div class="form__group">
+                                    <input name="email" type="email" class="form__input" placeholder="Email address" id="email" required>
+                                    <label for="email" class="form__label">Email address</label>
+                                </div>
+
+                                <div class="form__group">
+                                    <button type="submit" class="btn btn--green">Send &rarr;</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <div class="row">
+                <div class="col-1-of-2">
+                    <div class="footer__navigation">
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="#" class="footer__link">Top</a></li>
+                            <li class="footer__item"><a href="#" class="footer__link">about</a></li>
+                            <li class="footer__item"><a href="#" class="footer__link">Careers</a></li>
+                            <li class="footer__item"><a href="#" class="footer__link">Privacy</a></li>
+                            <li class="footer__item"><a target="_blank" href="img/dev_landeros.pdf" class="footer__link">Resume</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-of-2">
+                    <p class="footer__copyright">
+                        Built by <a href="#" class="footer__link">Fabian Landeros</a> 
+                        <br> 
+                        Copyright &copy; 2019.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+<!-- POPUP MODAL PURE CSS -->
+        <!-- <div class="popup" id="popup">
+            <div class="popup__content">
+                <div class="popup__left">
+                    <img src="img/nat-3-large.jpg" alt="Tour Photo" class="popup__img">
+                    <img src="img/nat-1-large.jpg" alt="Tour Photo" class="popup__img">
+                </div>
+                <div class="popup__right">
+                    <a href="#section-tours" class="popup__close">&times;</a>
+                    <h2 class="heading-secondary u-margin-bottom-small">Start Booking Now</h2>
+                    <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms</h3>
+                    <p class="popup__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Dolor dignissimos non velit eius quibusdam debitis laborum, autem iure accusamus placeat reiciendis 
+                        aspernatur quas? 
+                        Fuga, doloremque omnis assumenda rem, quam dicta dignissimos eum repellat 
+                        odit eaque minima cum, minus tempora veritatis.</p>
+                    <a href="#" class="btn btn--green">Book Now</a>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <section class="grid-test">
+            <div class="row">
+                <div class="col-1-of-2">
+                    Col 1 of 2
+                </div>
+                <div class="col-1-of-2">
+                    Col 1 of 2
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1-of-3">
+                    Col 1 of 3
+                </div>
+                <div class="col-1-of-3">
+                    Col 1 of 3
+                </div>
+                <div class="col-1-of-3">
+                    Col 1 of 3
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1-of-3">
+                    Col 1 of 3
+                </div>
+                <div class="col-2-of-3">
+                    Col 2 of 3
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1-of-4">
+                    Col 1 of 4
+                </div>
+                <div class="col-1-of-4">
+                    Col 1 of 4
+                </div>
+                <div class="col-1-of-4">
+                    Col 1 of 4
+                </div>
+                <div class="col-1-of-4">
+                    Col 1 of 4
+                </div>
+            </div>
+        </section> -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+<script>   
+        $('.navigation__link').click(function(){
+            $('.navigation__checkbox').click()
+        });
+</script>
+    </body>
+</html>
+
+<!-- $('.navigation__link').click(function() {
+    $('#navigation__icon').trigger('click');
+}); -->
