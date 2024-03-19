@@ -1,0 +1,12 @@
+{
+  "hash": "9a27661c9fd290ecf8f8895ca8297b84",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Welcome to the New Blog\"\nauthor: \"Fabian\"\ndate: \"2024-03-18\"\ncategories: [Code, Analysis]\n---\n\n## A New and Improved Lab Journey\n\nGreetings everyone, and welcome to the revitalized blog! I am thrilled to kickstart this journey with you. Previously, I was using Ghost Blog, which boasts a beautiful and user-friendly interface. However, I found formatting code within it to be annoying, which led me on a quest to explore a more efficient and effective solution.\n\n## Embracing Quarto: A Python Haven\n\nAfter some exploration, I stumbled upon Quarto and instantly fell in love with its simplicity and robust support for Python. Quarto has proven to be a game-changer in my coding and analysis endeavors, offering a seamless experience for incorporating Python code into my posts.\n\n### Check out an example! \n\n::: {#cell-Sine .cell execution_count=1}\n``` {.python .cell-code}\n# Plotting a sine wave \nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Generate x values from 0 to 2*pi\nx = np.linspace(0, 2*np.pi, 100)\n\n# Generate y values for the sine wave\ny = np.sin(x)\n\n# Plotting the sine wave\nplt.plot(x, y)\nplt.xlabel('x')\nplt.ylabel('sin(x)')\nplt.title('Sine Wave')\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![A Sine wave plot](index_files/figure-html/sine-output-1.png){#sine width=608 height=449}\n:::\n:::\n\n\nQuarto's intuitive interface and excellent code rendering make tasks like showcasing a sine wave plot a breeze. I look forward to sharing more exciting content and insights with you all in the realm of code and analysis. Stay tuned for upcoming posts that delve deeper into various programming and data analysis topics.\n\nThank you for joining me on this new blogging adventure!\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -4,6 +4,7 @@ author: "Fabiano"
 date: "2024-03-18"
 categories: [news, code, analysis]
 image: "image.jpg"
+draft: True
 ---
 
 This is a post with executable code.

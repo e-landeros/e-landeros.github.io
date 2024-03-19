@@ -1,5 +1,5 @@
 ---
-title: "The Madness"
+title: "Building Cool Stuff with ML"
 listing:
   contents: posts
   sort: "date desc"

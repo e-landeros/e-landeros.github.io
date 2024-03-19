@@ -10,9 +10,13 @@ website:
         href: https://github.com/e-landeros
       - icon: twitter
         href: https://twitter.com/landeros_labs
+      - icon: linkedin
+        href: https://linkedin.com/in/flanderos/
+      - icon: rocket
+        href: https://www.kaggle.com/elanderos
 format:
   html:
-    theme: solar
+    theme: lux
     css: styles.css
 
 
