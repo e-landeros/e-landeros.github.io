@@ -1,5 +1,5 @@
 ---
-title: "Welcome To My Blog"
+title: "Testing github push"
 author: "Tristan O'Malley"
 date: "2024-03-15"
 categories: [news]
