@@ -1,0 +1,79 @@
+---
+title: "Navigating the LLM Landscape: A Guide to Key Papers"
+author: "Fabian"
+date: "2023-11-22"
+categories: [History, LLM]
+---
+
+
+# Navigating the LLM Landscape: A Guide to Key Papers
+
+I am keeping a list of the papers which i think are the most important. why i dotn really know. just to make it easier fro me.
+
+## 1954 Early Beginnings
+- **Bag of Words (BOW) (1954):** Introduced the concept of word count vectors as textual features.
+- **TF-IDF (1972):** Improved word relevance scoring by weighting word occurrences.
+
+## 2013 The Rise of Embeddings and Neural Networks
+- **Word2Vec (2013):** Revolutionized text analysis with semantic word embeddings.
+- **Efficient Estimation of Word Representations in Vector Space**
+- **RNNs in Encoder-Decoder architectures (2014):** Enabled context utilization and text sequence processing.
+
+## 2017
+- **Transformer (June 2017):** A model for language translation that introduced a multihead attention mechanism within an Encoder-Decoder framework.
+- **Attention Is All You Need**
+
+## 2018
+- **Elmo (February 2018):** Offers deep contextualized word representations that take into account complex word usage and context variability.
+- **GPT (June 2018):** A Decoder-only architecture using autoregressive pre-training, later fine-tuned for specific downstream tasks.
+- **BERT (October 2018):** Pioneered pre-training for Encoder Transformers and streamlined fine-tuning across a range of tasks.
+
+## 2019
+- **Transformer XL (January 2019):** Expanded the capacity of the Transformer for longer text sequences by combining self-attention with recurrence.
+- **GPT-2 (February 2019):** Showcased the ability of large models to grasp language tasks without task-specific training.
+- **UniLM (May 2019):** Utilized a versatile Transformer network for both encoding and decoding language tasks.
+- **XLNet (June 2019):** An advanced model that combined the strengths of autoregressive and autoencoding training methods.
+- **RoBERTa (July 2019):** Improved upon BERT by optimizing its training process and data consumption.
+- **Sentence BERT (August 2019):** Altered BERT to generate sentence-level embeddings, facilitating direct semantic comparisons.
+- **Tiny BERT (September 2019):** Introduced distillation methods for compact and faster models.
+- **ALBERT (September 2019):** Introduced parameter reduction techniques to enhance the training efficiency of BERT.
+- **Distil BERT (October 2019):** A distilled version of BERT with a leaner architecture and without the next sentence prediction objective.
+- **T5 (October 2019):** Created a unified framework for a variety of text-based tasks using a text-to-text approach.
+- **BART (October 2019):** A model trained to effectively reconstruct text from its corrupted version.
+
+## 2020
+- **FastBERT (April 2020):** Introduced adaptability in inference time, offering a speed-tunable BERT variant.
+- **MobileBERT (April 2020):** A compressed version of BERT optimized for mobile devices.
+- **Longformer (April 2020):** A model that addresses extended text lengths through linearly scalable attention mechanisms.
+- **GPT-3 (May 2020):** Demonstrated the significant impact of scaling on the model's few-shot learning capability across multiple tasks.
+
+## 2021
+- **Codex (July 2021):** A GPT model fine-tuned on code repositories to specialize in programming language comprehension and code generation.
+- **FLAN (September 2021):** Utilized instruction tuning on a variety of datasets and tasks to improve model compliance with natural language instructions.
+- **Gopher (December 2021):** Evaluated different Transformer models to determine their performance across 152 tasks, demonstrating the importance of scaling.
+
+## 2022
+- **Instruct GPT (March 2022):** Focused on aligning model outputs with user intent through supervised and reinforcement learning techniques.
+- **Chinchilla (March 2022):** Examined the optimal scaling factors for model size and token volume against a fixed compute budget.
+- **PaLM (April 2022):** A high-capacity Transformer trained to manage massive data collections efficiently.
+- **OPT (May 2022):** A suite of models ranging in size, with OPT-175B offering capabilities competitive with GPT-3.
+- **BLOOM (November 2022):** Introduced a large, open-access model aiming to democratize the access to powerful language modeling technologies.
+- **Galactica (November 2022):** A domain-specific LLM trained on scientific material to capture and generate scientific knowledge.
+- **ChatGPT (November 2022):** Bridged the gap between formal text generation and interactive conversational capabilities.
+
+## 2023
+- **LLaMA (February 2023):** Presented a range of models trained exclusively on publicly available datasets, emphasizing accessibility.
+- **Alpaca (March 2023):** A fine-tuned version of LLaMA for following instructions, trained on demonstrations in the style of OpenAI's text-davinci-003.
+- **GPT-4 (March 2023):** A multimodal LLM capable of processing both image and text inputs.
+- **PaLM 2 (May 2023):** Improved upon its predecessor by leveraging a diverse set of pre-training objectives for a more holistic language understanding.
+- **LIMA (May 2023):** A fine-tuned model that emphasizes precision in task execution without resorting to additional fine-tuning.
+- **Falcon (June 2023):** An open-source model trained on curated web data.
+- **LLaMA 2 (July 2023):** Improved the LLaMA model with a focus on conversational use cases.
+- **Humpback (August 2023):** Applied Instruction backtranslation techniques to the LLaMA model for better performance.
+- **Code LLaMA (August 2023):** A specialized version of LLaMA for understanding and generating code.
+- **GPT-4V (September 2023):** Blended text and visual capabilities for enhanced multimodal interaction.
+- **LLaMA 2 Long (September 2023):** A LLaMA model variant designed to effectively manage extremely long context windows.
+- **Mistral 7B (October 2023):** Introduced grouped-query attention and sliding-window attention for processing arbitrarily long sequences efficiently.
+- **Llemma (October 2023):** Focused on mathematical reasoning and generation by pre-training on a mix of academic and mathematical content.
+- **CodeFusion (October 2023):** Uses iterative refinement and encoded natural language guidance to optimize code generation beyond auto-regressive models.
+- **Zephyr 7B (October 2023):** Utilized preference data for improved alignment with user intent in conversational models.

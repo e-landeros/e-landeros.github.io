@@ -1,6 +1,6 @@
 project:
   type: website
-
+  
 website:
   title: "Landeros Labs"
   navbar:
@@ -14,10 +14,31 @@ website:
         href: https://linkedin.com/in/flanderos/
       - icon: rocket
         href: https://www.kaggle.com/elanderos
+  back-to-top-navigation: true
+  page-footer:
+    background: light 
+    right: "Made with [Quarto](https://quarto.org/) © 2024 Fabian Landeros"
+    left:
+      - about.qmd
+      - icon: github
+        href: https://github.com/e-landeros
+      - icon: twitter
+        href: https://twitter.com/landeros_labs
+      - icon: linkedin
+        href: https://linkedin.com/in/flanderos/
+      - icon: rocket
+        href: https://www.kaggle.com/elanderos
+
 format:
   html:
     theme: lux
     css: styles.css
+
+highlight-style: nord
+
+output:
+  ipynb:
+    theme: red
 
 
 

@@ -1,0 +1,99 @@
+---
+title: "Data Discretization: A winning strategy"
+author: "Fabian"
+date: "2023-11-12"
+categories: [Code, Analysis]
+---
+
+I will show you an amazing and easy to implement technique that will have you winning Kaggle competitions against some of the best Machine Learning engineers in the world.
+
+How? With Data Discretization! It sounds boring I know but check it out!
+
+Data discretization emerges as a pivotal element in data preprocessing, substantially influencing the efficiency and accuracy of machine learning models. This article describes the concept of data discretization, delves into its necessity, explores the techniques employed, and illustrates its various forms. I will provide Python code snippets, granting a practical insight into the role data discretization plays in refining machine learning results.
+
+Unveiling Data Discretization: Significance and Methods
+Imagine your dataset brimming with continuous numerical values; data discretization is the process of segmenting these values into distinct categories or 'bins'.
+
+This can be likened to sorting a vast collection of books into genres, simplifying search and comprehension.
+
+The Critical Role of Data Discretization
+Data discretization is celebrated for its manifold benefits:
+
+Noise Attenuation: It consolidates similar data points, effectively reducing random noise and promoting a smooth dataset landscape.
+Augmented Model Performance: Certain machine learning algorithms exhibit improved performance when fed categorized data, akin to the precise harmony of finely-tuned instruments.
+Improved Transparency: Discretized data offers a transparent lens for discerning trends and patterns, thus facilitating informed decisions.
+Methodology of Data Discretization
+To illustrate, consider how we might categorize a collection of individuals' ages:
+
+import pandas as pd
+from sklearn.preprocessing import KBinsDiscretizer
+
+# Example: Binning age data
+data = {'age': [23, 37, 49, 58, 32, 15, 63, 29, 74, 48]}
+df = pd.DataFrame(data)
+
+# Setting up the discretizer
+est = KBinsDiscretizer(n_bins=4, encode='ordinal', strategy='uniform')
+
+# Fitting and transforming the data
+df['age_binned'] = est.fit_transform(df[['age']])
+print(df)
+In this example, we apply a uniform strategy to classify ages into four separate bins, thereby streamlining the dataset while preserving its intricacy.
+
+Data Discretization Methodologies
+Equal Width Binning: This method divides data into equal-sized intervals.
+Uniform Binning: It aims for a uniform distribution of data points within each bin.
+Equal Frequency Binning: It allocates the same number of data points to each bin.
+Quantile Binning: This technique arranges data into bins based on quantiles.
+K-Means Binning: Employs K-Means clustering to form bins in a data-driven approach.
+Custom and Domain-Based Binning: It involves designing bins based on specific domain knowledge or criteria.
+Binarization: It transforms numerical data into binary values, contingent on a predetermined threshold.
+Applying Data Discretization in Feature Engineering
+Employing data discretization can substantially bolster the effectiveness of certain modeling techniques, such as decision trees and random forests. It streamlines characteristics of datasets, which can improve the models' training speed and interpretability.
+
+Data Discretization in Practice: Code Illustrations
+Example 1: Age Group Segmentation
+Below is an example of how to categorize ages into predefined groups:
+
+# continuation of the previous code snippet
+# Segmenting customer ages into discrete categories
+age_bins = [18, 30, 45, 60, 75]
+age_labels = ['18-30', '31-45', '46-60', '61-75']
+df['age_group'] = pd.cut(df['age'], bins=age_bins, labels=age_labels)
+print(df[['age', 'age_group']])
+This categorization process allows for a more detailed analysis of customer age demographics.
+
+Example 2: Income Bracket Categorization
+When applied to income data, discretization enables the creation of distinct income brackets like "Low," "Mid," and "High," improving the data's analytical utility for strategy formulation.
+
+# Example hypothetical code snippet
+income_data = {'income': [45000, 90000, 22000, 150000, 37000, 78000]}
+df_income = pd.DataFrame(income_data)
+
+# Discretizing income levels into 'Low', 'Mid', and 'High' brackets
+income_bins = [0, 50000, 100000, float('inf')]
+income_labels = ['Low', 'Mid', 'High']
+df_income['income_bracket'] = pd.cut(df_income['income'], bins=income_bins, labels=income_labels)
+print(df_income)
+Example 3: The winning notebook
+The notebook I entered to win s03E25 kaggle competition relies on this principle. (There is still a week left in the competition but I will likely win it.) It is based on shifting targets and data discretization. if you follow this technique you will be in the top 20% of machine learning engineers that entered this competition.
+
+unique_targets = [1.25, 2.25, 3.05, 4.05, 4.85, 5.75, 6.55, 7.75, 9.25] 
+Y_trans = pd.Series([min(unique_targets, key = lambda x: abs(x - pred)) for pred in y])
+Lets check out whats happening. This code is transforming each prediction in y into the nearest value from a set of discrete target values, effectively discretizing the continuous predictions into a set of predefined categories. boom!
+
+Ascending to New Heights in Machine Learning
+Data discretization refines and simplifies complex datasets, thereby enhancing the training efficiency and predictive prowess of machine learning models. Aspiring data scientists should recognize that data discretization is not just a technique but a strategic approach critical to maximizing the potential of their data.
+
+By implementing strategic grouping through data discretization, machine learning models can achieve heightened clarity and accuracy, ultimately reaching peak performance in their predictions and analyses.
+
+A kaggle competition example
+Yet another illustrative Case from a Kaggle Contest For those avidly tracking the 2023 series of Kaggle's playground showdowns, you'll have observed that the inaugural challenge tasks participants with predicting California home valuations. Cracking the code for this introductory contest hinges on adeptly segmenting latitude and longitude information. This allows your predictive model to effectively discern and factor in the nuances of diverse geographic locales. Dive into my detailed notebooks for an in-depth guide featuring code walkthroughs.
+
+# bins for train_df 'Latitude', 'Longitude, 'HouseAge'
+train_df['LatitudeBin'] = pd.cut(train_df['Latitude'], bins=10)
+train_df['LongitudeBin'] = pd.cut(train_df['Longitude'], bins=10)
+train_df['HouseAgeBin'] = pd.cut(train_df['HouseAge'], bins=10)
+https://www.kaggle.com/code/elanderos/ps03e01-models
+
+That's 2 competitions you would have won on kaggle using Data Discretization. Make sure to try this technique out on your future competitions.

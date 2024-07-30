@@ -1,3 +1,8 @@
 jupyter
 matplotlib
 plotly
+pandas
+seaborn
+tensorflow
+scikit-learn
+tensorflow_probability
