@@ -3,7 +3,6 @@ title: "A/B Testing Demystified"
 author: "Fabian"
 date: "2023-01-18"
 categories: [news, code, analysis]
-draft: True
 ---
 
 ## A/B Testing Demystified

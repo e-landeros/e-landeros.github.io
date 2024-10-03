@@ -1,0 +1,150 @@
+---
+title: "Understanding Markov Decision Processes in Deep Reinforcement Learning"
+author: "Fabian"
+date: "2024-07-21"
+categories: [DRL, MDP]
+execute:
+  echo: true
+jupyter: python3
+---
+
+## Introduction
+
+Markov Decision Processes (MDPs) form the theoretical backbone of modern reinforcement learning, including deep reinforcement learning. In this post, we'll explore how MDPs provide the mathematical framework for understanding complex decision-making problems and how they translate into practical deep RL applications.
+
+## What is a Markov Decision Process?
+
+An MDP is a mathematical framework for modeling decision-making in situations where outcomes are partly random and partly under the control of a decision-maker. The "Markov" property states that the future only depends on the current state, not the history of how we got there.
+
+Formally, an MDP consists of:
+
+- A set of states $S$
+- A set of actions $A$
+- A transition function $P(s'|s,a)$
+- A reward function $R(s,a,s')$
+- A discount factor $\gamma \in [0,1]$
+
+```{python}
+#| label: mdp-example
+#| warning: false
+
+import numpy as np
+
+class SimpleGridWorldMDP:
+    def __init__(self, size=4):
+        self.size = size
+        self.states = [(i, j) for i in range(size) for j in range(size)]
+        self.actions = ['up', 'down', 'left', 'right']
+        self.goal = (size-1, size-1)
+        
+    def get_next_state(self, state, action):
+        i, j = state
+        if action == 'up':
+            next_i = max(0, i-1)
+            next_j = j
+        elif action == 'down':
+            next_i = min(self.size-1, i+1)
+            next_j = j
+        elif action == 'left':
+            next_i = i
+            next_j = max(0, j-1)
+        else:  # right
+            next_i = i
+            next_j = min(self.size-1, j+1)
+        return (next_i, next_j)
+    
+    def get_reward(self, state, action, next_state):
+        if next_state == self.goal:
+            return 1.0
+        return -0.1  # small negative reward for each step
+```
+
+## The Role of MDPs in Deep Reinforcement Learning
+
+Deep RL extends traditional RL by using deep neural networks to approximate key functions in the MDP framework. Let's look at how this works in practice.
+
+### Value Function Approximation
+
+In deep RL, we often use neural networks to approximate the value function $V(s)$ or action-value function $Q(s,a)$:
+
+```{python}
+#| label: dqn-example
+
+import torch
+import torch.nn as nn
+
+class DQN(nn.Module):
+    def __init__(self, state_dim, action_dim):
+        super(DQN, self).__init__()
+        self.network = nn.Sequential(
+            nn.Linear(state_dim, 64),
+            nn.ReLU(),
+            nn.Linear(64, 64),
+            nn.ReLU(),
+            nn.Linear(64, action_dim)
+        )
+    
+    def forward(self, x):
+        return self.network(x)
+
+# Example usage
+state_dim = 4  # for a simple environment
+action_dim = 2  # two possible actions
+model = DQN(state_dim, action_dim)
+```
+
+### Policy Gradient Methods
+
+Policy gradient methods directly learn the policy $\pi(a|s)$ using neural networks:
+
+$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}[\sum_{t=0}^T \nabla_\theta \log \pi_\theta(a_t|s_t)R_t]$$
+
+```{python}
+#| label: policy-gradient
+
+class PolicyNetwork(nn.Module):
+    def __init__(self, state_dim, action_dim):
+        super(PolicyNetwork, self).__init__()
+        self.network = nn.Sequential(
+            nn.Linear(state_dim, 128),
+            nn.ReLU(),
+            nn.Linear(128, action_dim),
+            nn.Softmax(dim=-1)
+        )
+    
+    def forward(self, x):
+        return self.network(x)
+```
+
+## Practical Considerations
+
+When implementing deep RL algorithms based on MDPs, several practical considerations come into play:
+
+1. **State Representation**: The state space must be represented in a way that neural networks can process effectively.
+2. **Reward Design**: The reward function should guide the agent toward desired behavior while maintaining the Markov property.
+3. **Experience Replay**: To break temporal correlations and improve sample efficiency, we store transitions $(s, a, r, s')$ in a replay buffer.
+
+```{python}
+#| label: replay-buffer
+
+class ReplayBuffer:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.buffer = []
+        self.position = 0
+    
+    def push(self, state, action, reward, next_state, done):
+        if len(self.buffer) < self.capacity:
+            self.buffer.append(None)
+        self.buffer[self.position] = (state, action, reward, next_state, done)
+        self.position = (self.position + 1) % self.capacity
+    
+    def sample(self, batch_size):
+        batch = random.sample(self.buffer, batch_size)
+        state, action, reward, next_state, done = zip(*batch)
+        return state, action, reward, next_state, done
+```
+
+## Conclusion
+
+MDPs provide the theoretical foundation for deep RL by formalizing the interaction between an agent and its environment. Understanding this framework is crucial for developing and implementing effective deep RL algorithms. As the field continues to advance, the principles of MDPs remain central to new developments in deep RL.
