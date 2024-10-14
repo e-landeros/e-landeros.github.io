@@ -32,12 +32,14 @@ programmer, I bring a unique blend of expertise to the table.
 
 ## 🔍 Interests
 
-
 ### Python
 Python is my go-to language for turning ideas into reality. From data manipulation to machine learning, Python's versatility allows me to tackle a wide range of challenges. Check out my Python projects and let's celebrate the beauty of clean, efficient code together.
 
 ### NLP (Natural Language Processing)
-NLP is my passion! I specialize in leveraging machine learning techniques to analyze and understand human language. From sentiment analysis to language generation, I'm dedicated to pushing the boundaries of NLP. Currently Workin on RAG applications!
+I specialize in leveraging machine learning techniques to analyze and understand human language. From sentiment analysis to language generation, I'm dedicated to pushing the boundaries of NLP. Currently Workin on RAG applications!
+
+### Reinforcement Learning
+Creating Agents which learn by trial and error is the most amazing thing I've ever witnessed in my life. 
 
 ### Data Science
 Data science is not just a profession; it's a way of thinking. I unravel complex challenges through predictive models, discover hidden opportunities in data patterns through exploratory data analysis (EDA), and guide discussions to shed light on problems from a different perspective. Let's dive into the world of data science together.
@@ -64,9 +66,11 @@ Data science is not just a profession; it's a way of thinking. I unravel complex
 
 ## 📖 Explore My Work
 
-Browse through my GitHub repositories to discover a variety of projects, from Python scripts to in-depth data science analyses. Feel free to reach out if you have questions, ideas, or just want to connect. Let's embark on this data-driven adventure together!
+Browse through my GitHub repositories to discover a variety of projects, from Python scripts to in-depth data science analysis. Feel free to reach out if you have questions, ideas, or just want to connect. Let's embark on this data-driven adventure together!
 
 🌟 **Collaborate with Me Free! 🤝**
+
+I rescues puppers and help non profits tackle climate change for free. 
 
 Are you a passionate, mission-driven non profit
 looking to make a difference in the world? I'd love to hear from you! 😊
