@@ -27,14 +27,85 @@ A/B testing typically follows these steps:
 1. Hypothesis: The specific idea or assumption that you want to test, such as "changing the color of a call-to-action button will increase click-through rates."
 2. Significance level: The probability that the observed difference between variants is due to random chance rather than a genuine effect. A common significance level used in A/B testing is 0.05, meaning there's a 5% chance of observing the result by chance alone.
 3. Confidence interval: A range within which the true value of the metric lies with a specified level of confidence. For instance, a 95% confidence interval would mean that we are 95% certain the true value falls within the given range.
+
+
+```{python}
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import pandas as pd
+
+# Illustrating Confidence Intervals
+np.random.seed(42)
+data = np.random.normal(loc=100, scale=15, size=100)
+ci = sns.histplot(data, kde=True)
+ci.set(title='Confidence Interval Example', xlabel='Metric Value', ylabel='Frequency')
+
+# Calculate and display the 95% confidence interval
+mean = np.mean(data)
+std = np.std(data)
+lower_ci = mean - 1.96 * std / np.sqrt(len(data))
+upper_ci = mean + 1.96 * std / np.sqrt(len(data))
+plt.axvline(lower_ci, color='red', linestyle='--')
+plt.axvline(upper_ci, color='red', linestyle='--')
+plt.text(lower_ci, 10, f'{lower_ci:.2f}', color='red', ha='right', va='center')
+plt.text(upper_ci, 10, f'{upper_ci:.2f}', color='red', ha='left', va='center')
+plt.show()
+```
+
 4. Statistical power: The ability to detect a difference between variants when it genuinely exists. A high statistical power means you have a greater chance of finding an effect if one is present, ensuring more accurate results.
 5. P-value: The probability that the observed results could be due to random chance. If the p-value is below the chosen significance level (e.g., 0.05), then there's statistically significant evidence supporting your hypothesis.
+
+```{python}
+# Illustrating P-values
+from scipy.stats import ttest_ind
+
+# Generate sample data for two variants
+np.random.seed(42)
+variant_a = np.random.normal(loc=100, scale=15, size=100)
+variant_b = np.random.normal(loc=105, scale=15, size=100)
+
+# Perform t-test
+t_stat, p_value = ttest_ind(variant_a, variant_b)
+
+# Create a box plot to compare the two variants
+plt.figure(figsize=(8, 6))
+sns.boxplot(data=[variant_a, variant_b])
+plt.xticks([0, 1], ['Variant A', 'Variant B'])
+plt.ylabel('Metric Value')
+plt.title('Comparison of Two Variants with P-value')
+plt.text(0.5, 130, f'P-value: {p_value:.3f}', ha='center', va='center')
+plt.show()
+```
+
 
 ### Section 3: A/B Testing in Real-World Business Scenarios
 
 #### 1. Email Marketing
 
 Example: Two different subject lines are tested for an email newsletter campaign. By analyzing the open and click-through rates, marketers can determine which subject line is more engaging and optimize future campaigns accordingly.
+
+```{python}
+# Email Marketing Example
+subject_lines = ['Subject A', 'Subject B']
+open_rates = [0.25, 0.32]
+click_through_rates = [0.10, 0.15]
+
+plt.figure(figsize=(8, 5))
+
+plt.subplot(1, 2, 1)
+sns.barplot(x=subject_lines, y=open_rates)
+plt.title('Open Rates by Subject Line')
+plt.ylabel('Open Rate')
+
+plt.subplot(1, 2, 2)
+sns.barplot(x=subject_lines, y=click_through_rates)
+plt.title('Click-Through Rates by Subject Line')
+plt.ylabel('Click-Through Rate')
+
+plt.tight_layout()
+plt.show()
+```
 
 #### 2. Web Design and User Experience (UX)
 
@@ -43,6 +114,8 @@ Example: A/B testing can be used to compare two layouts of a website's homepage,
 #### 3. Search Engine Optimization (SEO)
 
 Example: Google found that using larger images with people in ads resulted in a 26% lift in ad interactions on their search platform. Conducting A/B tests allowed them to optimize ad placements, creatives, and targeting by analyzing user behavior data.
+
+
 
 ### Conclusion
 

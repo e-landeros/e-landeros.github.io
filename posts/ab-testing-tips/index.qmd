@@ -1,6 +1,6 @@
 
 ---
-title: "The Common Mistakes You're Making With A/B Testing (And How To Avoid Them"
+title: "The Common Mistakes You're Making With A/B Testing And How To Avoid Them"
 author: "Fabian"
 date: "2023-11-01"
 categories: [AB, Stats]
@@ -8,7 +8,25 @@ categories: [AB, Stats]
 
 # The Common Mistakes You're Making With A/B Testing (And How To Avoid Them)
 
-![A/B Testing](https://example.com/ab-testing-image.jpg)
+``` {python}
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import pandas as pd
+
+# Simulate A/B test data
+np.random.seed(42)
+control_data = np.random.normal(loc=100, scale=15, size=100)
+variant_data = np.random.normal(loc=110, scale=15, size=100)
+
+# Create a box plot to compare the two variants
+plt.figure(figsize=(8, 6))
+sns.boxplot(data=[control_data, variant_data])
+plt.xticks([0, 1], ['Control', 'Variant'])
+plt.ylabel('Conversion Rate')
+plt.title('A/B Testing Example')
+plt.show()
+```
 
 A/B testing is one of the most powerful tools in a marketer's toolkit. By showing different variants of a page to different segments of users, you can directly measure the impact of changes and optimize for increased conversion. However, many marketers fall into common pitfalls when setting up and analyzing their A/B tests. In this post, we'll go over some of the most frequent mistakes and provide tips on how to avoid them.
 
@@ -29,7 +47,33 @@ The most common goal with A/B testing is increasing conversion rates. But you ca
 
 Now let's get into some common mistakes people make when running A/B tests. The first is over-relying on p-values to determine the significance of results. P-values tell you the probability that the difference between variants is due to chance. At the commonly used threshold of 0.05, a p-value lower than that signifies your results are statistically significant (i.e. not random).
 
-![Moar P-Value](https://example.com/moar-p-value-image.jpg)
+```{python}
+from scipy.stats import ttest_ind
+
+# Generate sample data
+np.random.seed(42)
+data1 = np.random.normal(loc=5, scale=2, size=100)
+data2 = np.random.normal(loc=5.5, scale=2, size=100)
+
+# Perform t-test
+t_stat, p_value = ttest_ind(data1, data2)
+
+# Create histograms
+plt.figure(figsize=(8, 4))
+plt.subplot(1, 2, 1)
+sns.histplot(data1, kde=True, color='blue')
+plt.title('Control Group')
+plt.xlabel('Metric Value')
+
+plt.subplot(1, 2, 2)
+sns.histplot(data2, kde=True, color='orange')
+plt.title('Variant Group')
+plt.xlabel('Metric Value')
+
+plt.suptitle(f'Comparison with P-value: {p_value:.3f}')
+plt.tight_layout()
+plt.show()
+```
 
 P-values are based on null hypothesis testing - they assume there is no difference between the variants. The p-value tells you the probability of seeing your results if the null hypothesis is true.
 
@@ -53,7 +97,20 @@ Relying solely on p-values misses critical perspective when analyzing A/B test i
 
 Another error is failing to define a minimum detectable effect prior to testing. This is the smallest effect that would be meaningful enough to impact decisions. By calculating this ahead of time, you can better prioritize experiments and ensure they'll be running long enough to potentially detect a meaningful effect.
 
-![MDE Calculation](https://example.com/mde-calculation-image.jpg)
+```{python}
+# Sample MDE calculation visualization
+mde_values = [0.05, 0.1, 0.15, 0.2]
+sample_sizes = [1000, 500, 300, 200]
+
+plt.figure(figsize=(8, 6))
+plt.plot(mde_values, sample_sizes, marker='o')
+plt.title('Relationship between MDE and Sample Size')
+plt.xlabel('Minimum Detectable Effect')
+plt.ylabel('Required Sample Size')
+plt.grid(True)
+plt.show()
+```
+
 
 The Minimum Detectable Effect (MDE) is the smallest effect size that a statistical test can detect with a given power and significance level. It is a useful measure for planning experiments and studies, as it can help to determine the sample size required to achieve a desired level of sensitivity.
 

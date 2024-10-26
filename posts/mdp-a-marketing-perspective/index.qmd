@@ -1,5 +1,5 @@
 ---
-title: "Markov decision process in marketing intution"
+title: "Markov decision process intuition - marketing example"
 author: "Fabian"
 date: "2024-10-06"
 categories: [Marketing, Graph, Markov]
