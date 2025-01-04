@@ -34,6 +34,7 @@ format:
   html:
     theme: lux
     css: styles.css
+    page-layout: full
 
 highlight-style: nord
 
