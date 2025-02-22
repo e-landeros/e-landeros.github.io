@@ -20,15 +20,18 @@ about:
 ---
 ### 👋 Hey there! I'm Fabian, a Data Scientist & Python Enthusiast
 
-Join me on my data-driven adventure as I leverage the power of data to
-make smarter decisions and contribute to the ever-evolving field of data
-science.
+Join me on my data-driven adventure as I leverage the power of data and AI to
+make smarter decisions and contribute to the ever-evolving field of AI. But mostly I just need to build cool stuff with AI.
 
 ## 🚀 Mission
 
-My mission is to harness the transformative power of data and use it to
+My mission is to harness the transformative power of data and AI.  I use it to
 elevate humanity through better decisions. As a marketer, economist, and
-programmer, I bring a unique blend of expertise to the table.
+AI Engineer, I bring a unique blend of expertise to the table. 
+
+If you're looking to hire an AI engineer, I'm your guy. 
+I think the whole hiring process is completly broken right now, so just send me message if your interested in chatting.
+Im going to continue to build things. 
 
 ## 🔍 Interests
 
@@ -39,15 +42,15 @@ Python is my go-to language for turning ideas into reality. From data manipulati
 I specialize in leveraging machine learning techniques to analyze and understand human language. From sentiment analysis to language generation, I'm dedicated to pushing the boundaries of NLP. Currently Workin on RAG applications!
 
 ### Reinforcement Learning
-Creating Agents which learn by trial and error is the most amazing thing I've ever witnessed in my life. 
+Creating Agents which learn by trial and error is the most amazing thing I've ever witnessed in my life. I want to replace all my children with agents!!
 
 ### Data Science
 Data science is not just a profession; it's a way of thinking. I unravel complex challenges through predictive models, discover hidden opportunities in data patterns through exploratory data analysis (EDA), and guide discussions to shed light on problems from a different perspective. Let's dive into the world of data science together.
 
-## 💼 Skills
+## 💼 Skills and Tools I like to use
 
 - **Programming Languages:** Python, Javascript, Go, Mojo 🔥
-- **Machine Learning:** Scikit-learn, TensorFlow, PyTorch, FastAI, NLTK, LGBM, Spacy, HuggingFace
+- **Machine Learning Frameworks:** Scikit-learn, TensorFlow, PyTorch, FastAI, NLTK, LGBM, Spacy, HuggingFace, Pydantic-AI, Smolagents, Langchain
 - **Data Analysis:** Pandas, NumPy
 - **Data Visualization:** Matplotlib, Seaborn, Plotly, Looker
 - **Database:** SQL, MongoDB, SQLite, Snowflake

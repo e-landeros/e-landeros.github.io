@@ -32,11 +32,11 @@ website:
 
 format:
   html:
-    theme: lux
+    theme: cyborg
     css: styles.css
     page-layout: full
 
-highlight-style: nord
+highlight-style: github
 
 output:
   ipynb:

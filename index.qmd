@@ -1,5 +1,5 @@
 ---
-title: "Building Cool Stuff with ML"
+title: "Building Cool Stuff with AI"
 listing:
   contents: posts
   sort: "date desc"

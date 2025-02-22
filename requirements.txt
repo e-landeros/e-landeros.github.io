@@ -6,3 +6,7 @@ seaborn
 tensorflow
 scikit-learn
 tensorflow_probability
+pydantic-ai
+smolagents
+langchain
+openai
