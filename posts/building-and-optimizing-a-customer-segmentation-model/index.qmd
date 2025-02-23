@@ -8,6 +8,8 @@ format:
     code-fold: false
     toc: true
 jupyter: python3
+freeze: true
+image: segments.png
 ---
 
 In today's data-driven marketing landscape, understanding your customers is crucial for tailoring effective marketing strategies. One powerful technique for gaining these insights is customer segmentation using machine learning algorithms. In this blog post, we'll explore how to build and optimize a Customer Segmentation Model using K-means clustering.

@@ -1,4 +1,4 @@
 - source: project
   netlify:
     - id: c11e8aa1-a62e-4fe4-891f-07dab6eaa238
-      url: 'https://landeros-labs.com'
+      url: https://landeros-labs.com

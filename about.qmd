@@ -18,7 +18,7 @@ about:
       href: https://www.kaggle.com/elanderos
 
 ---
-### 👋 Hey there! I'm Fabian, a Data Scientist & Python Enthusiast
+### 👋 Hey there! I'm Fabian, a Data Scientist, AI Engineer, and Python Enthusiast!
 
 Join me on my data-driven adventure as I leverage the power of data and AI to
 make smarter decisions and contribute to the ever-evolving field of AI. But mostly I just need to build cool stuff with AI.
