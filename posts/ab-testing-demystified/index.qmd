@@ -3,6 +3,10 @@ title: "A/B Testing Demystified"
 author: "Fabian"
 date: "2023-01-18"
 categories: [AB]
+format:
+  html:
+    code-fold: false
+    toc: true
 ---
 
 ## A/B Testing Demystified

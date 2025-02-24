@@ -3,9 +3,12 @@ title: "Understanding Multi-Armed Bandits: A Gateway to Reinforcement Learning"
 author: "Fabian"
 date: "2024-08-01"
 categories: [Code, Analysis]
-execute:
-  echo: true
+format:
+  html:
+    code-fold: false
+    toc: true
 jupyter: python3
+draft: False
 ---
 
 ## Introduction
