@@ -2,7 +2,7 @@
 title: "Understanding Markov Decision Processes in Deep Reinforcement Learning"
 author: "Fabian"
 date: "2024-07-21"
-categories: [DRL, MDP]
+categories: [DRL]
 execute:
   echo: true
 jupyter: python3

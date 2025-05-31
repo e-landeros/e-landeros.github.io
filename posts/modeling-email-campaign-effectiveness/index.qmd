@@ -2,7 +2,7 @@
 title: "Email Campaign Effectiveness Predictor"
 author: "Fabian"
 date: "2024-10-13"
-categories: [Marketing, RandomForest, Regression]
+categories: [Marketing, RandomForest]
 format:
   html:
     page-layout: full

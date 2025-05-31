@@ -2,7 +2,7 @@
 title: "ad-optimization-with-multi-armed-bandits"
 author: "Fabian"
 date: "2024-10-02"
-categories: [Code, Analysis]
+categories: []
 execute:
   echo: true
 jupyter: python3

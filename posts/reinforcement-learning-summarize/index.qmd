@@ -2,7 +2,7 @@
 title: "Reinforcement Learning: A Comprehensive Overview"
 author: "Fabian"
 date: "2024-05-11"
-categories: [Reinforcement Learning, AI]
+categories: [RL]
 execute:
   echo: true
 jupyter: python3

@@ -2,7 +2,7 @@
 title: "Data Discretization: A winning strategy"
 author: "Fabian"
 date: "2023-11-12"
-categories: [Code, Analysis]
+categories: [Analysis]
 execute:
   echo: true
 jupyter: python3
