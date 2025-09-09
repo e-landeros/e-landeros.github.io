@@ -2,7 +2,7 @@
 title: "The Bellman Equation: The Foundation of Deep Reinforcement Learning"
 author: "Fabian"
 date: "2024-07-11"
-categories: [DRL, MDP]
+categories: [RL, MDP]
 execute:
   echo: true
 jupyter: python3
