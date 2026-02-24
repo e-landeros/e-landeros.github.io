@@ -18,7 +18,7 @@ website:
   back-to-top-navigation: true
   page-footer:
     background: light 
-    right: "Made with [Quarto](https://quarto.org/) © 2024 Fabian Landeros"
+    right: "Made with [Quarto](https://quarto.org/) © 2023 Fabian Landeros"
     left:
       - about.qmd
       - icon: github
