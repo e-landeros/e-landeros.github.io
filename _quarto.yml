@@ -32,7 +32,7 @@ website:
 
 format:
   html:
-    theme: cyborg
+    theme: vapor
     css: styles.css
     page-layout: full
 
