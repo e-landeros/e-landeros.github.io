@@ -1,6 +1,6 @@
 project:
   type: website
-  
+
 website:
   google-analytics: G-8BJ08S4YXX
   title: "Landeros Labs"
@@ -17,7 +17,7 @@ website:
         href: https://www.kaggle.com/elanderos
   back-to-top-navigation: true
   page-footer:
-    background: light 
+    background: light
     right: "Made with [Quarto](https://quarto.org/) © 2023 Fabian Landeros"
     left:
       - about.qmd
@@ -32,7 +32,7 @@ website:
 
 format:
   html:
-    theme: vapor
+    theme: cyborg
     css: styles.css
     page-layout: full
 
@@ -43,6 +43,3 @@ code-block-border-left: "#31BAE9"
 output:
   ipynb:
     theme: red
-
-
-
