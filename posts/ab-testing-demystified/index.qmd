@@ -2,7 +2,8 @@
 title: "A/B Testing Demystified"
 author: "Fabian"
 date: "2023-01-18"
-categories: [AB]
+categories: ["Marketing Analytics"]
+image: thumbnail.png
 format:
   html:
     code-fold: false

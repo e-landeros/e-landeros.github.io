@@ -8,7 +8,31 @@ listing:
   sort-ui: false
   filter-ui: false
 page-layout: full
-title-block-banner: true
+title-block-banner: false
+title-block-style: none
 ---
 
+::: {.home-hero}
+<canvas class="hero-birds" aria-hidden="true"></canvas>
 
+::: {.home-hero-copy}
+# Data Scientist, ML Engineer, Independent AI Researcher
+
+I'm Fabian Landeros. This is where I write about experiments, research notes, and small ideas I want to understand better.
+:::
+
+![](profile.jpeg){.home-hero-image alt="Fabian Landeros"}
+:::
+
+::: {.career-highlights}
+- Data scientist and AI engineer at tech startups from 2020 to 2026.
+- M.S. in AI and machine learning from Colorado State University, 2023.
+- B.A. in Economics from Harvard University, 2018.
+- Currently considering a pivot toward a PhD and AI safety research.
+:::
+
+## Recent Writing
+
+<div id="blog-categories" class="blog-categories" aria-label="Blog categories"></div>
+
+<script src="hero-birds.js" defer></script>

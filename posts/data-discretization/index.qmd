@@ -2,7 +2,8 @@
 title: "Data Discretization: A winning strategy"
 author: "Fabian"
 date: "2023-11-12"
-categories: [Analysis]
+categories: ["Data Science"]
+image: thumbnail.png
 execute:
   echo: true
 jupyter: python3

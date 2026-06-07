@@ -2,7 +2,7 @@
 title: "Building and Optimizing a Customer Segmentation Model"
 author: "Fabian"
 date: "2024-08-13"
-categories: [Marketing]
+categories: ["Marketing Analytics"]
 format:
   html:
     code-fold: false

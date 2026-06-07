@@ -2,7 +2,8 @@
 title: "Navigating the LLM Landscape: A Guide to Key Papers"
 author: "Fabian"
 date: "2023-11-22"
-categories: [History]
+categories: ["AI Research"]
+image: thumbnail.png
 ---
 
 

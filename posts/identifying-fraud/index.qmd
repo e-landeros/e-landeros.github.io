@@ -2,7 +2,8 @@
 title: "Identifying Fraud with Isolation Forest"
 author: "Fabian"
 date: "2024-10-17"
-categories: [Fraud Detection]
+categories: ["Machine Learning"]
+image: thumbnail.png
 execute:
   echo: true
 jupyter: python3

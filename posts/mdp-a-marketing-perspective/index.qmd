@@ -2,7 +2,8 @@
 title: "Markov decision process intuition - marketing example"
 author: "Fabian"
 date: "2024-10-06"
-categories: [Graph, Markov]
+categories: ["Reinforcement Learning"]
+image: thumbnail.png
 format:
   html:
     code-fold: false

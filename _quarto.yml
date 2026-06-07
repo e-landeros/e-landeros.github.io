@@ -6,7 +6,6 @@ website:
   title: "Landeros Labs"
   navbar:
     right:
-      - about.qmd
       - icon: github
         href: https://github.com/e-landeros
       - icon: twitter
@@ -20,7 +19,6 @@ website:
     background: light
     right: "Made with [Quarto](https://quarto.org/) © 2023 Fabian Landeros"
     left:
-      - about.qmd
       - icon: github
         href: https://github.com/e-landeros
       - icon: twitter
@@ -36,7 +34,7 @@ format:
     css: styles.css
     page-layout: full
 
-highlight-style: github
+syntax-highlighting: one-dark-catppuccin-latte.theme
 code-block-bg: true
 code-block-border-left: "#31BAE9"
 

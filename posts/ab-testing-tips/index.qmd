@@ -3,7 +3,8 @@
 title: "The Common Mistakes You're Making With A/B Testing And How To Avoid Them"
 author: "Fabian"
 date: "2023-11-01"
-categories: [AB]
+categories: ["Marketing Analytics"]
+image: thumbnail.png
 ---
 
 # The Common Mistakes You're Making With A/B Testing (And How To Avoid Them)
