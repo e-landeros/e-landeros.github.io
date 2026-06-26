@@ -5,6 +5,7 @@ pandas
 seaborn
 tensorflow
 scikit-learn
+statsmodels
 tensorflow_probability
 pydantic-ai
 smolagents
