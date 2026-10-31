@@ -1,4 +1,38 @@
 (() => {
+  // ─── Category tagging ───────────────────────────────────────────────────
+  // Listing chips are emitted with base64-encoded category names. Decode them
+  // and stamp a slug so styles.css can attach a Catppuccin-colored icon.
+  const slugify = (value) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const decodeCategory = (value) => {
+    try {
+      return decodeURIComponent(window.atob(value));
+    } catch {
+      return value;
+    }
+  };
+
+  const tagCategories = () => {
+    document.querySelectorAll("[data-category]").forEach((element) => {
+      const raw = element.getAttribute("data-category") || "";
+      const name = raw ? decodeCategory(raw) : "all";
+      element.setAttribute("data-cat", slugify(name) || "all");
+    });
+
+    document.querySelectorAll(".listing-category").forEach((element) => {
+      const slug = slugify(element.textContent.trim());
+      if (slug) {
+        element.setAttribute("data-cat", slug);
+      }
+    });
+  };
+
+  tagCategories();
+
   const categoryTarget = document.querySelector("#blog-categories");
   const categorySidebar = document.querySelector("#quarto-margin-sidebar");
   const categoryTitle = categorySidebar?.querySelector(".quarto-listing-category-title");
@@ -66,8 +100,8 @@
     context.translate(bird.x, bird.y);
     context.rotate(Math.atan2(bird.vy, bird.vx) * 0.4);
     context.strokeStyle = index % 3 === 0
-      ? "rgba(103, 232, 249, 0.72)"
-      : "rgba(255, 255, 255, 0.62)";
+      ? "rgba(137, 220, 235, 0.70)"  // Catppuccin sky
+      : "rgba(180, 190, 254, 0.55)"; // Catppuccin lavender
     context.lineWidth = 1.4;
     context.lineCap = "round";
     context.beginPath();

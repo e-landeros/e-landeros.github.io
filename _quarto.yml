@@ -3,32 +3,37 @@ project:
   render:
     - "*.qmd"
     - "posts"
+  resources:
+    - favicon.ico
+    - favicon.svg
+    - apple-touch-icon.png
 
 website:
   google-analytics: G-8BJ08S4YXX
   title: "Building Cool Stuff with AI"
+  favicon: favicon.png
   navbar:
     right:
       - icon: github
         href: https://github.com/e-landeros
-      - icon: twitter
-        href: https://twitter.com/landeros_labs
+      - icon: twitter-x
+        href: https://x.com/e_landeros_
       - icon: linkedin
-        href: https://linkedin.com/in/e_landeros_
-      - icon: rocket
+        href: https://www.linkedin.com/in/e_landeros_
+      - icon: graph-up
         href: https://www.kaggle.com/elanderos
   back-to-top-navigation: true
   page-footer:
-    background: light
+    background: dark
     right: "Made with [Quarto](https://quarto.org/) © 2023 Fabian Landeros"
     left:
       - icon: github
         href: https://github.com/e-landeros
-      - icon: twitter
-        href: https://twitter.com/e_landeros_
+      - icon: twitter-x
+        href: https://x.com/e_landeros_
       - icon: linkedin
-        href: https://linkedin.com/in/flanderos
-      - icon: rocket
+        href: https://www.linkedin.com/in/e_landeros_
+      - icon: graph-up
         href: https://www.kaggle.com/elanderos
 
 format:
@@ -38,6 +43,7 @@ format:
       - theme/catppuccin-mocha.scss
     css: styles.css
     page-layout: full
+    include-in-header: theme/head.html
     code-block-bg: true
     code-block-border-left: "#cba6f7"
 

@@ -178,3 +178,85 @@ body:has(.home-hero) #quarto-margin-sidebar.categories-moved {
     width: 112px;
   }
 }
+
+/* ─── Iconography (Catppuccin Mocha accents) ────────────────────────────── */
+
+/* Social icons: font glyphs, recolored via `color`. Brand colors are replaced
+   with palette accents so the chrome stays coherent. */
+.navbar .bi-github,
+.footer .bi-github {
+  color: #cba6f7;
+}
+
+.navbar .bi-twitter-x,
+.footer .bi-twitter-x {
+  color: #cdd6f4;
+}
+
+.navbar .bi-linkedin,
+.footer .bi-linkedin {
+  color: #89b4fa;
+}
+
+.navbar .bi-graph-up,
+.footer .bi-graph-up {
+  color: #a6e3a1;
+}
+
+.navbar .nav-link:hover .bi,
+.footer .nav-link:hover .bi {
+  color: #b4befe;
+}
+
+/* Category glyphs: the tag JS in site.js stamps `data-cat` on chips, and the
+   glyph comes from the Bootstrap Icons font already loaded by Quarto. */
+.listing-category::before,
+.blog-categories .category::before,
+.quarto-listing-category .category::before {
+  display: inline-block;
+  margin-right: 0.35rem;
+  font-family: "bootstrap-icons";
+  font-size: 0.85em;
+  line-height: 1;
+  vertical-align: -1px;
+}
+
+[data-cat]::before {
+  content: "\f5b2"; /* tag — fallback for unmapped categories */
+  color: #9399b2;
+}
+
+[data-cat="ai-agents"]::before {
+  content: "\f6b1"; /* robot */
+  color: #cba6f7;
+}
+
+[data-cat="ai-research"]::before {
+  content: "\f444"; /* journal-text */
+  color: #a6e3a1;
+}
+
+[data-cat="data-science"]::before {
+  content: "\f8c4"; /* database */
+  color: #94e2d5;
+}
+
+[data-cat="machine-learning"]::before {
+  content: "\f2d6"; /* cpu */
+  color: #89b4fa;
+}
+
+[data-cat="reinforcement-learning"]::before {
+  content: "\f2ee"; /* diagram-3 */
+  color: #f5c2e7;
+}
+
+[data-cat="marketing-analytics"]::before {
+  content: "\f484"; /* megaphone */
+  color: #fab387;
+}
+
+[data-cat="all"]::before {
+  content: "\f3f4"; /* grid */
+  color: #9399b2;
+}

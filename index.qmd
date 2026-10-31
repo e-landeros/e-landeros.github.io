@@ -35,4 +35,4 @@ I'm Fabian Landeros. This is where I write about experiments, research notes, an
 
 <div id="blog-categories" class="blog-categories" aria-label="Blog categories"></div>
 
-<script src="hero-birds.js" defer></script>
+<script src="site.js" defer></script>
