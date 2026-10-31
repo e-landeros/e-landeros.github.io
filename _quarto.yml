@@ -3,7 +3,7 @@ project:
 
 website:
   google-analytics: G-8BJ08S4YXX
-  title: "Landeros Labs"
+  title: "Building Cool Stuff with AI"
   navbar:
     right:
       - icon: github
@@ -11,7 +11,7 @@ website:
       - icon: twitter
         href: https://twitter.com/landeros_labs
       - icon: linkedin
-        href: https://linkedin.com/in/flanderos/
+        href: https://linkedin.com/in/e_landeros_
       - icon: rocket
         href: https://www.kaggle.com/elanderos
   back-to-top-navigation: true
@@ -22,9 +22,9 @@ website:
       - icon: github
         href: https://github.com/e-landeros
       - icon: twitter
-        href: https://twitter.com/landeros_labs
+        href: https://twitter.com/e_landeros_
       - icon: linkedin
-        href: https://linkedin.com/in/flanderos/
+        href: https://linkedin.com/in/flanderos
       - icon: rocket
         href: https://www.kaggle.com/elanderos
 
