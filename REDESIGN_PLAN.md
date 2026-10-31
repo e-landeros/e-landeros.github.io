@@ -89,26 +89,27 @@ renderable.
 
 ---
 
-## Batch 5 — About, navigation
+## Batch 5 — About, navigation  ✅ DONE
 
 - [x] Hero recolored to Mocha; birds canvas recolored to Sky/Lavender; profile ring Mauve (done in Batch 3)
-- [ ] Rewrite `about.qmd` from the archived copy, move the career highlights there
-- [ ] Navbar: `Posts`, `About`, search box; keep social icons on the right
-- [ ] Style search results + About page
-- [ ] Commit: `feat: About page, navigation and search`
+- [x] Rewrote `about.qmd`: solana profile card, corrected social links, career highlights moved here from the hero, typos fixed, non-profit/dog-rescue note kept
+- [x] Navbar: `Writing`, `About`, search box, RSS, and the social icons
+- [x] Styled the About card, about-links and search surfaces in Mocha
+- [x] Site identity: `website.title: elanderos`, `site-url`, description, hero headline now reads `elanderos`
+- [x] Commit: `feat: About page, navigation, search, feed, social cards, 404`
 
 **Gate:** every navbar link resolves; search returns results for a known post title.
 
 ---
 
-## Batch 6 — Blog infrastructure
+## Batch 6 — Blog infrastructure  ✅ DONE (same commit as Batch 5)
 
-- [ ] RSS feed + sitemap in `_quarto.yml`
-- [ ] Open Graph / Twitter card metadata on posts
-- [ ] Styled `404.qmd`
-- [ ] Commit: `feat: RSS, sitemap, social cards, 404`
+- [x] RSS feed at `/index.xml` (`listing.feed: true`; `feed-type` is not a valid key in Quarto 1.10)
+- [x] `sitemap.xml` — generated automatically from `site-url`; `website.sitemap` is **not** a valid key and was removed after a schema error
+- [x] Open Graph + Twitter card metadata (verified in rendered `<head>`)
+- [x] Styled `404.qmd` → `/404.html` (GitHub Pages serves it automatically)
 
-**Gate:** `/sitemap.xml` and `/index.xml` render; 404 page styled.
+**Gate:** `/sitemap.xml` and `/index.xml` render; 404 page styled. Verified.
 
 ---
 

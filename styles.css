@@ -70,33 +70,60 @@ body:has(.home-hero) #quarto-margin-sidebar.categories-moved {
   color: #bac2de;
 }
 
-.career-highlights {
-  display: grid;
-  gap: 0.55rem;
-  max-width: 720px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: #a6adc8;
-  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-  line-height: 1.45;
+
+/* ─── About page ────────────────────────────────────────────────────────── */
+
+.quarto-about-solana .about-entity {
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 12px;
+  padding: 2rem;
 }
 
-.career-highlights li {
-  position: relative;
-  padding-left: 1.15rem;
+.about-entity .about-image {
+  border-radius: 12px;
+  border: 1px solid #45475a;
 }
 
-.career-highlights li::before {
-  position: absolute;
-  top: 0.62em;
-  left: 0;
-  width: 0.38rem;
-  height: 0.38rem;
-  content: "";
-  border-radius: 50%;
-  background: #cba6f7;
-  box-shadow: 0 0 14px rgba(203, 166, 247, 0.65);
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 0.4rem;
+  color: #bac2de;
+  font-family: "JetBrains Mono", "Fira Code", SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+}
+
+.about-link:hover {
+  border-color: #cba6f7;
+  color: #cba6f7;
+}
+
+.about-link .bi-github {
+  color: #cba6f7;
+}
+
+.about-link .bi-twitter-x {
+  color: #cdd6f4;
+}
+
+.about-link .bi-linkedin {
+  color: #89b4fa;
+}
+
+.about-link .bi-graph-up {
+  color: #a6e3a1;
 }
 
 .home-hero-image {
@@ -168,11 +195,6 @@ body:has(.home-hero) #quarto-margin-sidebar.categories-moved {
     margin-bottom: 1.15rem;
   }
 
-  .career-highlights {
-    gap: 0.45rem;
-    font-size: 0.92rem;
-    line-height: 1.4;
-  }
 
   .home-hero-image {
     width: 112px;
@@ -259,4 +281,38 @@ body:has(.home-hero) #quarto-margin-sidebar.categories-moved {
 [data-cat="all"]::before {
   content: "\f3f4"; /* grid */
   color: #9399b2;
+}
+
+/* ─── 404 ───────────────────────────────────────────────────────────────── */
+
+.not-found {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.not-found h1 {
+  font-family: "JetBrains Mono", "Fira Code", SFMono-Regular, Menlo, monospace;
+  font-size: 3.5rem;
+  color: #f38ba8;
+  margin-bottom: 0.5rem;
+}
+
+.not-found-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.45rem 0.9rem;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 0.4rem;
+  color: #bac2de;
+}
+
+.not-found-link:hover {
+  border-color: #cba6f7;
+  color: #cba6f7;
 }

@@ -1,0 +1,15 @@
+---
+title: "404 — Not Found"
+format:
+  html:
+    page-layout: full
+---
+
+::: {.not-found}
+# 404
+
+This page doesn't exist. It may have been renamed, or the link that sent you
+here is wrong.
+
+[Back to the writing](/index.html){.not-found-link}
+:::

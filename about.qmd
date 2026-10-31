@@ -4,80 +4,58 @@ image: profile.jpeg
 about:
   template: solana
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/landeros_labs
+    - icon: github
+      text: GitHub
+      href: https://github.com/e-landeros
+    - icon: twitter-x
+      text: X
+      href: https://x.com/e_landeros_
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com/in/flanderos/
-    - icon: github
-      text: Github
-      href: https://github.com/e-landeros
-    - icon: rocket
-      text: kaggle
+      href: https://www.linkedin.com/in/e_landeros_
+    - icon: graph-up
+      text: Kaggle
       href: https://www.kaggle.com/elanderos
-
 ---
-### 👋 Hey there! I'm Fabian, a Data Scientist, AI Engineer, and Python Enthusiast!
 
-Join me on my data-driven adventure as I leverage the power of data and AI to
-make smarter decisions and contribute to the ever-evolving field of AI. But mostly I just need to build cool stuff with AI.
+I'm Fabian Landeros — a data scientist and AI engineer. I build systems that
+learn, and I write down what I learn while building them.
 
-## 🚀 Mission
+## Background
 
-My mission is to harness the transformative power of data and AI.  I use it to
-elevate humanity through better decisions. As a marketer, economist, and
-AI Engineer, I bring a unique blend of expertise to the table. 
+- Data scientist and AI engineer at tech startups, 2020–2026.
+- M.S. in AI and machine learning, Colorado State University, 2023.
+- B.A. in Economics, Harvard University, 2018.
+- Currently working on a PhD in AI.
 
-If you're looking to hire an AI engineer, I'm your guy. 
-I think the whole hiring process is completly broken right now, so just send me message if your interested in chatting.
-Im going to continue to build things. 
+## What I work on
 
-## 🔍 Interests
+**Agents and LLM systems.** Retrieval-augmented applications, agent design
+patterns, and evaluation harnesses — mostly in Python with PydanticAI, LangChain,
+and smolagents.
 
-### Python
-Python is my go-to language for turning ideas into reality. From data manipulation to machine learning, Python's versatility allows me to tackle a wide range of challenges. Check out my Python projects and let's celebrate the beauty of clean, efficient code together.
+**Reinforcement learning.** Bandits, MDPs, and Bellman equations. Watching an
+agent learn by trial and error is still the most interesting thing I get to do.
 
-### NLP (Natural Language Processing)
-I specialize in leveraging machine learning techniques to analyze and understand human language. From sentiment analysis to language generation, I'm dedicated to pushing the boundaries of NLP. Currently Workin on RAG applications!
+**Applied ML.** Forecasting, segmentation, uplift and marketing-mix modeling,
+anomaly detection, and the unglamorous feature engineering that decides whether
+any of it works.
 
-### Reinforcement Learning
-Creating Agents which learn by trial and error is the most amazing thing I've ever witnessed in my life. I want to replace all my children with agents!!
+**Computer vision and OCR.** Document pipelines, image models, and the small
+details that make them survive real inputs.
 
-### Data Science
-Data science is not just a profession; it's a way of thinking. I unravel complex challenges through predictive models, discover hidden opportunities in data patterns through exploratory data analysis (EDA), and guide discussions to shed light on problems from a different perspective. Let's dive into the world of data science together.
+## Tools I reach for
 
-## 💼 Skills and Tools I like to use
+- **Languages:** Python, JavaScript, Go, Mojo
+- **ML:** PyTorch, scikit-learn, Hugging Face, NLTK, spaCy, LightGBM
+- **Agents:** PydanticAI, smolagents, LangChain
+- **Data:** pandas, NumPy, SQL, Snowflake, MongoDB
+- **Viz:** matplotlib, seaborn, plotly, Looker
+- **Serving:** FastAPI, Flask, Django, Docker
+- **Editor:** VS Code, Jupyter, Cursor
 
-- **Programming Languages:** Python, Javascript, Go, Mojo 🔥
-- **Machine Learning Frameworks:** Scikit-learn, TensorFlow, PyTorch, FastAI, NLTK, LGBM, Spacy, HuggingFace, Pydantic-AI, Smolagents, Langchain
-- **Data Analysis:** Pandas, NumPy
-- **Data Visualization:** Matplotlib, Seaborn, Plotly, Looker
-- **Database:** SQL, MongoDB, SQLite, Snowflake
-- **Web Development:** Flask, Fastapi, Django
-- **Version Control:** Git
-- **Tools:** Jupyter Notebooks, VS Code, Docker, Cursor
-- **Statistical Analysis:** Scipy, StatsModels
+## Working together
 
-## 🌐 Connect with Me
-
-- [Kaggle](https://www.kaggle.com/elanderos): Explore my data science competitions and kernels on Kaggle.
-- [Twitter](https://twitter.com/landeros_labs): Follow me for updates on data science, programming, and more.
-- [LinkedIn](https://www.linkedin.com/in/flanderos/): Connect with me on LinkedIn for professional networking and collaboration opportunities.
-
-
-
-## 📖 Explore My Work
-
-Browse through my GitHub repositories to discover a variety of projects, from Python scripts to in-depth data science analysis. Feel free to reach out if you have questions, ideas, or just want to connect. Let's embark on this data-driven adventure together!
-
-🌟 **Collaborate with Me Free! 🤝**
-
-I rescue puppers and help non profits tackle climate change for free. 
-
-Are you a passionate, mission-driven non profit
-looking to make a difference in the world? I'd love to hear from you! 😊
-
-I believe in fostering a culture of collaboration and giving back to the community.
-That's why I'm excited to offer free consulting services and resources
-to non-profits like yours. 🌐
+I take on free consulting for non-profits working on climate and for people
+rescuing dogs. If you're hiring AI engineers and the process feels broken — it
+usually is — just send me a message and let's talk about the work itself.

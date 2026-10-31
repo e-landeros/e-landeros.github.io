@@ -10,9 +10,20 @@ project:
 
 website:
   google-analytics: G-8BJ08S4YXX
-  title: "Building Cool Stuff with AI"
+  title: "elanderos"
+  site-url: https://e-landeros.github.io
+  description: "Notes on AI, data, and things I build. By Fabian Landeros."
   favicon: favicon.png
+  image: profile.jpeg
+  open-graph: true
+  twitter-card: true
+  search: true
   navbar:
+    left:
+      - text: "Writing"
+        href: /index.html#recent-writing
+      - text: "About"
+        href: /about.html
     right:
       - icon: github
         href: https://github.com/e-landeros
@@ -22,6 +33,8 @@ website:
         href: https://www.linkedin.com/in/e_landeros_
       - icon: graph-up
         href: https://www.kaggle.com/elanderos
+      - icon: rss
+        href: /index.xml
   back-to-top-navigation: true
   page-footer:
     background: dark
