@@ -40,6 +40,15 @@ The script renders the site, writes `_site/.nojekyll`, and force-pushes the outp
 to an orphan `gh-pages` branch on `origin`. There is no CI: publishing happens from
 this machine.
 
+**`git push` does not update the live site.** GitHub Pages serves the `gh-pages`
+branch, not `main`. Pushing to `main` only backs up source; run `./publish.sh`
+whenever you want the public site to change. `publish.sh` publishes whatever is in
+the working tree, so commit first if you want source and site in sync. Each publish
+replaces the `gh-pages` history — never hand-edit that branch.
+
+After a publish, Pages takes roughly 30–60 seconds to build and the CDN caches pages
+for up to 10 minutes; if content looks stale, wait and hard-refresh.
+
 First-time setup on GitHub (one manual step): repository **Settings → Pages →
 Deploy from a branch → `gh-pages` / `(root)`**, then enable **Enforce HTTPS**.
 
