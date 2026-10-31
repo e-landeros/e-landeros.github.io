@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fabian">
+<meta name="dcterms.date" content="2025-08-21">
+
+<title>Tesseract vs.&nbsp;EasyOCR — From Quick Wins to Robust Pipelines – elanderos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6331b7a41a3006f6026bec105bbe82ad.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e8e602f557c81bfd4d589c9518bbd3a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8BJ08S4YXX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8BJ08S4YXX', { 'anonymize_ip': true});
+</script>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<meta name="theme-color" content="#1e1e2e">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Tesseract vs.&nbsp;EasyOCR — From Quick Wins to Robust Pipelines – elanderos">
+<meta property="og:description" content="Notes on AI, data, and things I build. By Fabian Landeros.">
+<meta property="og:image" content="https://e-landeros.github.io/posts/OCR-pipelines-refresher/thumbnail.png">
+<meta property="og:site_name" content="elanderos">
+<meta property="og:image:height" content="675">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="Tesseract vs.&nbsp;EasyOCR — From Quick Wins to Robust Pipelines – elanderos">
+<meta name="twitter:description" content="Notes on AI, data, and things I build. By Fabian Landeros.">
+<meta name="twitter:image" content="https://e-landeros.github.io/posts/OCR-pipelines-refresher/thumbnail.png">
+<meta name="twitter:image-height" content="675">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">elanderos</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html#recent-writing"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-landeros"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/e_landeros_"> <i class="bi bi-twitter-x" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/flanderos"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.kaggle.com/elanderos"> <i class="bi bi-graph-up" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Tesseract vs.&nbsp;EasyOCR — From Quick Wins to Robust Pipelines</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine Learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Fabian </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 21, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tldr" id="toc-tldr" class="nav-link active" data-scroll-target="#tldr">TL;DR</a></li>
+  <li><a href="#what-well-build" id="toc-what-well-build" class="nav-link" data-scroll-target="#what-well-build">What we’ll build</a></li>
+  <li><a href="#why-im-writing-this" id="toc-why-im-writing-this" class="nav-link" data-scroll-target="#why-im-writing-this">Why I’m writing this</a></li>
+  <li><a href="#setup-prerequisites" id="toc-setup-prerequisites" class="nav-link" data-scroll-target="#setup-prerequisites">Setup &amp; prerequisites</a>
+  <ul class="collapse">
+  <li><a href="#install-macos-linux-windows" id="toc-install-macos-linux-windows" class="nav-link" data-scroll-target="#install-macos-linux-windows">Install (macOS / Linux / Windows)</a></li>
+  </ul></li>
+  <li><a href="#quick-differences-practical-viewpoint" id="toc-quick-differences-practical-viewpoint" class="nav-link" data-scroll-target="#quick-differences-practical-viewpoint">Quick differences (practical viewpoint)</a>
+  <ul class="collapse">
+  <li><a href="#minimal---psm-cheat-sheet-tesseract" id="toc-minimal---psm-cheat-sheet-tesseract" class="nav-link" data-scroll-target="#minimal---psm-cheat-sheet-tesseract">Minimal <code>--psm</code> cheat sheet (Tesseract)</a></li>
+  </ul></li>
+  <li><a href="#part-1-minimal-example-synthetic-image" id="toc-part-1-minimal-example-synthetic-image" class="nav-link" data-scroll-target="#part-1-minimal-example-synthetic-image">Part 1 — Minimal example (synthetic image)</a></li>
+  <li><a href="#part-2-a-robust-preprocessing-pipeline-opencv" id="toc-part-2-a-robust-preprocessing-pipeline-opencv" class="nav-link" data-scroll-target="#part-2-a-robust-preprocessing-pipeline-opencv">Part 2 — A robust preprocessing pipeline (OpenCV)</a>
+  <ul class="collapse">
+  <li><a href="#pipeline-overview" id="toc-pipeline-overview" class="nav-link" data-scroll-target="#pipeline-overview">Pipeline overview</a></li>
+  <li><a href="#ocr-the-cleaned-result" id="toc-ocr-the-cleaned-result" class="nav-link" data-scroll-target="#ocr-the-cleaned-result">OCR the cleaned result</a></li>
+  </ul></li>
+  <li><a href="#tiny-evaluation-helper" id="toc-tiny-evaluation-helper" class="nav-link" data-scroll-target="#tiny-evaluation-helper">Tiny evaluation helper</a></li>
+  <li><a href="#when-to-pick-which-rules-of-thumb" id="toc-when-to-pick-which-rules-of-thumb" class="nav-link" data-scroll-target="#when-to-pick-which-rules-of-thumb">When to pick which (rules of thumb)</a></li>
+  <li><a href="#common-pitfalls-fixes" id="toc-common-pitfalls-fixes" class="nav-link" data-scroll-target="#common-pitfalls-fixes">Common pitfalls &amp; fixes</a></li>
+  <li><a href="#reproducibility-checklist" id="toc-reproducibility-checklist" class="nav-link" data-scroll-target="#reproducibility-checklist">Reproducibility checklist</a></li>
+  <li><a href="#drop-in-function-extract_text_robust" id="toc-drop-in-function-extract_text_robust" class="nav-link" data-scroll-target="#drop-in-function-extract_text_robust">Drop-in function: <code>extract_text_robust</code></a></li>
+  <li><a href="#final-notes" id="toc-final-notes" class="nav-link" data-scroll-target="#final-notes">Final notes</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<blockquote class="blockquote">
+<p>I wrote this post because I had to re-learn OCR recently. I kept forgetting the details, configs, and gotchas — so this is my reference to stay sharp. If you’re in the same boat, copy this into a Jupyter notebook or run the code cells as-is.</p>
+</blockquote>
+<section id="tldr" class="level2">
+<h2 class="anchored" data-anchor-id="tldr">TL;DR</h2>
+<ul>
+<li><strong>Use Tesseract</strong> when you can preprocess your images into clean, high-contrast, deskewed text blocks. It’s fast, accurate, and transparent.</li>
+<li><strong>Use EasyOCR</strong> when layout is messy, images are low-quality, or you need a <strong>one-function</strong> solution that handles a lot of cases out-of-the-box.</li>
+<li>The real secret: <strong>good preprocessing</strong> beats model choice more often than not. Below, I show a <strong>minimal example</strong> and then a <strong>full, production-style preprocessing pipeline</strong> you can reuse.</li>
+</ul>
+</section>
+<section id="what-well-build" class="level2">
+<h2 class="anchored" data-anchor-id="what-well-build">What we’ll build</h2>
+<ol type="1">
+<li>A <strong>minimal OCR demo</strong> using both libraries on a synthetic image (so the notebook always runs without external assets).</li>
+<li>A <strong>robust preprocessing pipeline</strong> (OpenCV) that handles skew, noise, line removal, and multi-block pages — then feeds the cleaned image into Tesseract and EasyOCR for comparison.</li>
+<li>A tiny <strong>evaluation helper</strong> so you can sanity-check your results vs.&nbsp;expected text.</li>
+</ol>
+</section>
+<section id="why-im-writing-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-im-writing-this">Why I’m writing this</h2>
+<p>I needed OCR again recently and realized I’d forgotten a bunch of the practical bits: - Which <code>--psm</code> to use in Tesseract? - What’s the fastest path to “good enough” when the scan is crooked or low DPI? - When should I reach for EasyOCR instead? This post is my “drop-in” reference — with code I can paste right into a Jupyter notebook.</p>
+</section>
+<section id="setup-prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="setup-prerequisites">Setup &amp; prerequisites</h2>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> Tesseract requires the native binary <strong>in addition</strong> to the Python wrapper <code>pytesseract</code>.</p>
+</blockquote>
+<section id="install-macos-linux-windows" class="level3">
+<h3 class="anchored" data-anchor-id="install-macos-linux-windows">Install (macOS / Linux / Windows)</h3>
+<p><strong>macOS (Homebrew):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install tesseract </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pytesseract easyocr opencv-python-headless pillow numpy matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Ubuntu / Debian:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get install <span class="at">-y</span> tesseract-ocr</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pytesseract easyocr opencv-python-headless pillow numpy matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Windows:</strong> 1. Install Tesseract from the official Windows installer (add to PATH during setup). 2. Then:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pytesseract easyocr opencv-python pillow numpy matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="835c4f28" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytesseract, sys, os, platform</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Python:"</span>, sys.version)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Platform:"</span>, platform.platform())</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"pytesseract:"</span>, pytesseract.__version__)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python: 3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]
+Platform: macOS-15.5-arm64-arm-64bit
+pytesseract: 0.3.13</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="quick-differences-practical-viewpoint" class="level2">
+<h2 class="anchored" data-anchor-id="quick-differences-practical-viewpoint">Quick differences (practical viewpoint)</h2>
+<ul>
+<li><strong>Tesseract</strong> shines with <strong>clean prints</strong> and when you can control preprocessing. You can tweak <code>--psm</code> (page segmentation) and <code>--oem</code> (engine mode) for accuracy and speed.</li>
+<li><strong>EasyOCR</strong> is great for <strong>messy images</strong> and <strong>quick starts</strong>: it does detection + recognition in one shot and is more forgiving without heavy preprocessing.</li>
+<li>If you need the most control and explainability (data pipelines that you can reason about), <strong>start with Tesseract + OpenCV</strong>. If you want a fast “good enough,” try <strong>EasyOCR</strong> first.</li>
+</ul>
+<section id="minimal---psm-cheat-sheet-tesseract" class="level3">
+<h3 class="anchored" data-anchor-id="minimal---psm-cheat-sheet-tesseract">Minimal <code>--psm</code> cheat sheet (Tesseract)</h3>
+<ul>
+<li><code>--psm 6</code>: Assume a single uniform block of text (good for paragraphs).</li>
+<li><code>--psm 11</code>: Sparse text (no particular order) — useful for screenshots / scattered text.</li>
+<li><code>--psm 3</code>: Fully automatic page segmentation (no OSD) — general default when unsure.</li>
+</ul>
+</section>
+</section>
+<section id="part-1-minimal-example-synthetic-image" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-minimal-example-synthetic-image">Part 1 — Minimal example (synthetic image)</h2>
+<p>We’ll generate a synthetic text image (so this notebook is self-contained), then run <strong>Tesseract</strong> and <strong>EasyOCR</strong> on it.</p>
+<div id="a4675777" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image, ImageDraw, ImageFont, ImageFilter</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cv2</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytesseract</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Generate a synthetic image with text ---</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>W, H <span class="op">=</span> <span class="dv">1200</span>, <span class="dv">400</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> Image.new(<span class="st">"RGB"</span>, (W, H), <span class="st">"white"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>draw <span class="op">=</span> ImageDraw.Draw(img)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Try to grab a font; fall back if not available.</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_font(size<span class="op">=</span><span class="dv">48</span>):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># These paths are heuristic; adjust to your system if needed.</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    candidates <span class="op">=</span> [</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"/System/Library/Fonts/Supplemental/Arial.ttf"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"C:/Windows/Fonts/arial.ttf"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> candidates:</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> ImageFont.truetype(p, size<span class="op">=</span>size)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ImageFont.load_default()</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>font <span class="op">=</span> get_font(<span class="dv">48</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Invoice #19845 — Amount Due: $1,284.30</span><span class="ch">\n</span><span class="st">Due Date: 2025-10-15</span><span class="ch">\n</span><span class="st">Please remit to: Zeetō Group"</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>draw.text((<span class="dv">50</span>, <span class="dv">80</span>), text, font<span class="op">=</span>font, fill<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Add mild rotation and noise to simulate a scan</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> img.rotate(<span class="op">-</span><span class="dv">2</span>, expand<span class="op">=</span><span class="va">True</span>, fillcolor<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>noisy <span class="op">=</span> np.array(img).astype(np.uint8)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">6</span>, noisy.shape).astype(np.int16)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>noisy <span class="op">=</span> np.clip(noisy.astype(np.int16) <span class="op">+</span> noise, <span class="dv">0</span>, <span class="dv">255</span>).astype(np.uint8)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>noisy_img <span class="op">=</span> Image.fromarray(noisy).<span class="bu">filter</span>(ImageFilter.GaussianBlur(<span class="fl">0.6</span>))</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">3</span>))</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>plt.imshow(noisy_img)<span class="op">;</span> plt.axis(<span class="st">'off'</span>)<span class="op">;</span> plt.title(<span class="st">'Synthetic scan'</span>)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="2747a34a" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Minimal Tesseract ---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gray <span class="op">=</span> cv2.cvtColor(np.array(noisy_img), cv2.COLOR_RGB2GRAY)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tess_config <span class="op">=</span> <span class="st">"--oem 3 --psm 6 -l eng"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tess_text <span class="op">=</span> pytesseract.image_to_string(gray, config<span class="op">=</span>tess_config)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Tesseract says:</span><span class="ch">\n</span><span class="st">"</span>, tess_text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tesseract says:
+ Invoice #19845 — Amount Due: $1,284.30
+Due Date: 2025-10-15
+Please remit to: Zeeto Group
+</code></pre>
+</div>
+</div>
+<div id="a70b90df" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Minimal EasyOCR ---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> easyocr</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>reader <span class="op">=</span> easyocr.Reader([<span class="st">'en'</span>], gpu<span class="op">=</span><span class="va">False</span>)  <span class="co"># set gpu=True if CUDA available</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> reader.readtext(np.array(noisy_img))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>easy_text <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([r[<span class="dv">1</span>] <span class="cf">for</span> r <span class="kw">in</span> results])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">EasyOCR says:</span><span class="ch">\n</span><span class="st">"</span>, easy_text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using CPU. Note: This module is much faster with a GPU.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+EasyOCR says:
+ Invoice #19845
+Amount Due: $1,284.30
+Due Date: 2025-10-15
+Please remit to: Zeeto
+Group</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>You should already get decent results. If not, jump to the pipeline below — it will almost always help.</p>
+</blockquote>
+</section>
+<section id="part-2-a-robust-preprocessing-pipeline-opencv" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-a-robust-preprocessing-pipeline-opencv">Part 2 — A robust preprocessing pipeline (OpenCV)</h2>
+<p>Real documents are messy: skewed, low DPI, scans with lines and stamps, or multi-column layouts. Below is a compact pipeline you can adapt anywhere.</p>
+<section id="pipeline-overview" class="level3">
+<h3 class="anchored" data-anchor-id="pipeline-overview">Pipeline overview</h3>
+<ol type="1">
+<li><strong>Grayscale → CLAHE</strong> (local contrast boost)</li>
+<li><strong>Denoise</strong> (Gaussian / bilateral)</li>
+<li><strong>Threshold</strong> (adaptive for uneven lighting)</li>
+<li><strong>Deskew</strong> (compute angle from text regions)</li>
+<li><strong>Line removal</strong> (horizontal/vertical morphology)</li>
+<li><strong>(Optional) Block segmentation</strong> (contours / bounding boxes)</li>
+<li><strong>OCR with tuned configs</strong></li>
+</ol>
+<div id="57da9aa0" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cv2</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Tuple, List</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_gray(img):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> img.ndim <span class="op">==</span> <span class="dv">3</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clahe(gray, clip<span class="op">=</span><span class="fl">3.0</span>, tile<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>)):</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> cv2.createCLAHE(clipLimit<span class="op">=</span>clip, tileGridSize<span class="op">=</span>tile)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c.<span class="bu">apply</span>(gray)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> denoise(gray, ksize<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cv2.GaussianBlur(gray, (ksize, ksize), <span class="dv">0</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adaptive_binarize(gray, block<span class="op">=</span><span class="dv">31</span>, C<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cv2.adaptiveThreshold(gray, <span class="dv">255</span>, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>                                 cv2.THRESH_BINARY, block, C)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deskew(binary):</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Invert: text as 1s</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    inv <span class="op">=</span> <span class="dv">255</span> <span class="op">-</span> binary</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    coords <span class="op">=</span> np.column_stack(np.where(inv <span class="op">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> coords.size <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> binary, <span class="fl">0.0</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    rect <span class="op">=</span> cv2.minAreaRect(coords)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    angle <span class="op">=</span> rect[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> angle <span class="op">&lt;</span> <span class="op">-</span><span class="dv">45</span>:</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>        angle <span class="op">=</span> <span class="dv">90</span> <span class="op">+</span> angle</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rotate</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    (h, w) <span class="op">=</span> binary.shape[:<span class="dv">2</span>]</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> cv2.getRotationMatrix2D((w<span class="op">//</span><span class="dv">2</span>, h<span class="op">//</span><span class="dv">2</span>), angle, <span class="fl">1.0</span>)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    rotated <span class="op">=</span> cv2.warpAffine(binary, M, (w, h), flags<span class="op">=</span>cv2.INTER_CUBIC, borderMode<span class="op">=</span>cv2.BORDER_REPLICATE)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rotated, angle</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_lines(binary, scale<span class="op">=</span><span class="dv">40</span>):</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove horizontal and vertical lines</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    horiz <span class="op">=</span> binary.copy()</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    vert <span class="op">=</span> binary.copy()</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> horiz.shape[<span class="dv">1</span>]</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    h_size <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, cols <span class="op">//</span> scale)</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>    h_kernel <span class="op">=</span> cv2.getStructuringElement(cv2.MORPH_RECT, (h_size, <span class="dv">1</span>))</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    horiz <span class="op">=</span> cv2.erode(horiz, h_kernel, iterations<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    horiz <span class="op">=</span> cv2.dilate(horiz, h_kernel, iterations<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> vert.shape[<span class="dv">0</span>]</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    v_size <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, rows <span class="op">//</span> scale)</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    v_kernel <span class="op">=</span> cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="dv">1</span>, v_size))</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    vert <span class="op">=</span> cv2.erode(vert, v_kernel, iterations<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    vert <span class="op">=</span> cv2.dilate(vert, v_kernel, iterations<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> cv2.bitwise_or(horiz, vert)</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> cv2.bitwise_and(binary, cv2.bitwise_not(mask))</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cleaned</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_text_blocks(binary, min_area<span class="op">=</span><span class="dv">800</span>):</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find contours -&gt; bounding boxes for text regions</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>    cnts, _ <span class="op">=</span> cv2.findContours(<span class="dv">255</span> <span class="op">-</span> binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    boxes <span class="op">=</span> []</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> cnts:</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>        x, y, w, h <span class="op">=</span> cv2.boundingRect(c)</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> w<span class="op">*</span>h <span class="op">&gt;=</span> min_area:</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>            boxes.append((x, y, w, h))</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort top-to-bottom, then left-to-right</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>    boxes.sort(key<span class="op">=</span><span class="kw">lambda</span> b: (b[<span class="dv">1</span>], b[<span class="dv">0</span>]))</span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> boxes</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_boxes(img_rgb, boxes):</span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>    vis <span class="op">=</span> img_rgb.copy()</span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (x,y,w,h) <span class="kw">in</span> boxes:</span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>        cv2.rectangle(vis, (x,y), (x<span class="op">+</span>w,y<span class="op">+</span>h), (<span class="dv">0</span>,<span class="dv">255</span>,<span class="dv">0</span>), <span class="dv">2</span>)</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vis</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="34b616b1" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>orig_rgb <span class="op">=</span> np.array(noisy_img)  <span class="co"># from Part 1</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>gray <span class="op">=</span> to_gray(orig_rgb)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>eq <span class="op">=</span> clahe(gray)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>den <span class="op">=</span> denoise(eq, ksize<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>bin_img <span class="op">=</span> adaptive_binarize(den, block<span class="op">=</span><span class="dv">31</span>, C<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>desk, angle <span class="op">=</span> deskew(bin_img)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>nolines <span class="op">=</span> remove_lines(desk, scale<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>blocks <span class="op">=</span> find_text_blocks(nolines)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Deskew angle: </span><span class="sc">{</span>angle<span class="sc">:.2f}</span><span class="ss"> degrees; blocks found: </span><span class="sc">{</span><span class="bu">len</span>(blocks)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">3</span>))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].imshow(gray, cmap<span class="op">=</span><span class="st">'gray'</span>)<span class="op">;</span> axs[<span class="dv">0</span>].set_title(<span class="st">'gray'</span>)<span class="op">;</span> axs[<span class="dv">0</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].imshow(bin_img, cmap<span class="op">=</span><span class="st">'gray'</span>)<span class="op">;</span> axs[<span class="dv">1</span>].set_title(<span class="st">'binarized'</span>)<span class="op">;</span> axs[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].imshow(desk, cmap<span class="op">=</span><span class="st">'gray'</span>)<span class="op">;</span> axs[<span class="dv">2</span>].set_title(<span class="st">'deskew'</span>)<span class="op">;</span> axs[<span class="dv">2</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">3</span>].imshow(visualize_boxes(orig_rgb, blocks))<span class="op">;</span> axs[<span class="dv">3</span>].set_title(<span class="st">'blocks'</span>)<span class="op">;</span> axs[<span class="dv">3</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Deskew angle: 90.00 degrees; blocks found: 1</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ocr-the-cleaned-result" class="level3">
+<h3 class="anchored" data-anchor-id="ocr-the-cleaned-result">OCR the cleaned result</h3>
+<p>We’ll OCR either the <strong>whole cleaned page</strong> or <strong>per block</strong> and concatenate (often better for multi-column pages).</p>
+<div id="4f81f431" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytesseract, easyocr</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tess_config <span class="op">=</span> <span class="st">"--oem 3 --psm 6 -l eng"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Whole-page OCR (Tesseract)</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>tess_text_clean <span class="op">=</span> pytesseract.image_to_string(nolines, config<span class="op">=</span>tess_config)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Block-wise OCR (Tesseract)</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>block_texts <span class="op">=</span> []</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x,y,w,h) <span class="kw">in</span> blocks:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    roi <span class="op">=</span> nolines[y:y<span class="op">+</span>h, x:x<span class="op">+</span>w]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    txt <span class="op">=</span> pytesseract.image_to_string(roi, config<span class="op">=</span>tess_config)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    block_texts.append(txt.strip())</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>tess_block_concat <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([t <span class="cf">for</span> t <span class="kw">in</span> block_texts <span class="cf">if</span> t])</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># EasyOCR on the cleaned page</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>reader <span class="op">=</span> easyocr.Reader([<span class="st">'en'</span>], gpu<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>easy_results <span class="op">=</span> reader.readtext(orig_rgb)              <span class="co"># original</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>easy_results_clean <span class="op">=</span> reader.readtext(cv2.cvtColor(nolines, cv2.COLOR_GRAY2RGB))  <span class="co"># cleaned</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>easy_text_clean <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([r[<span class="dv">1</span>] <span class="cf">for</span> r <span class="kw">in</span> easy_results_clean])</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">[Tesseract whole-page]</span><span class="ch">\n</span><span class="st">"</span>, tess_text_clean)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">[Tesseract block-wise]</span><span class="ch">\n</span><span class="st">"</span>, tess_block_concat)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">[EasyOCR cleaned]</span><span class="ch">\n</span><span class="st">"</span>, easy_text_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using CPU. Note: This module is much faster with a GPU.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[Tesseract whole-page]
+ i
+4 a,
+‘ ny
+- 1
+a
+nny
+«a ce
+ray
+
+
+[Tesseract block-wise]
+ i
+4 a,
+‘ ny
+- 1
+a
+nny
+«a ce
+ray
+
+[EasyOCR cleaned]
+ </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="tiny-evaluation-helper" class="level2">
+<h2 class="anchored" data-anchor-id="tiny-evaluation-helper">Tiny evaluation helper</h2>
+<p>This isn’t a full OCR benchmark — just a quick way to see if you’re moving in the right direction. Replace <code>expected</code> with your known text.</p>
+<div id="58813de5" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> difflib <span class="im">import</span> SequenceMatcher</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> similarity(a, b):</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> SequenceMatcher(<span class="va">None</span>, a, b).ratio()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>expected <span class="op">=</span> <span class="st">"Invoice #19845 — Amount Due: $1,284.30</span><span class="ch">\n</span><span class="st">Due Date: 2025-10-15</span><span class="ch">\n</span><span class="st">Please remit to: Zeetō Group"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> {</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tesseract_minimal"</span>: similarity(expected, tess_text),</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tesseract_clean_page"</span>: similarity(expected, tess_text_clean),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tesseract_blockwise"</span>: similarity(expected, tess_block_concat),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"easyocr_minimal"</span>: similarity(expected, easy_text),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"easyocr_clean"</span>: similarity(expected, easy_text_clean),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> scores.items():</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>k<span class="sc">:24s}</span><span class="ss"> -&gt; </span><span class="sc">{</span>v<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tesseract_minimal        -&gt; 0.983
+tesseract_clean_page     -&gt; 0.100
+tesseract_blockwise      -&gt; 0.084
+easyocr_minimal          -&gt; 0.954
+easyocr_clean            -&gt; 0.000</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Expect <strong>cleaned</strong> variants to beat the minimal ones. If not, tweak <code>CLAHE</code> clip limit, adaptive threshold window (<code>block</code>), and <code>--psm</code>.</p>
+</blockquote>
+</section>
+<section id="when-to-pick-which-rules-of-thumb" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-pick-which-rules-of-thumb">When to pick which (rules of thumb)</h2>
+<ul>
+<li>Start with <strong>EasyOCR</strong> if you need a single function that usually works.</li>
+<li>Switch to / prefer <strong>Tesseract</strong> if:
+<ul>
+<li>You can invest in preprocessing.</li>
+<li>You need deterministic behavior with standard configs.</li>
+<li>Your inputs are consistent (e.g., invoices from the same vendor).</li>
+</ul></li>
+<li>For tricky scans (faxed, shadowed, low DPI), the <strong>preprocessing pipeline</strong> is the real unlock.</li>
+</ul>
+</section>
+<section id="common-pitfalls-fixes" class="level2">
+<h2 class="anchored" data-anchor-id="common-pitfalls-fixes">Common pitfalls &amp; fixes</h2>
+<ul>
+<li><strong>Low DPI (&lt;200):</strong> upscale (e.g., 1.5× or 2×) <strong>after</strong> denoise and <strong>before</strong> thresholding.</li>
+<li><strong>Skew:</strong> deskew before OCR; even 2–3° helps a lot.</li>
+<li><strong>Tables/lines:</strong> remove lines via morphology; they kill recall.</li>
+<li><strong>Bad thresholding:</strong> try adaptive vs.&nbsp;Otsu; increase local window size (<code>block</code>).</li>
+<li><strong>Wrong <code>--psm</code>:</strong> test <code>6</code>, <code>3</code>, and <code>11</code>. Results can flip depending on layout.</li>
+</ul>
+<hr>
+</section>
+<section id="reproducibility-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-checklist">Reproducibility checklist</h2>
+<ul>
+<li>Fix your <strong>pipeline parameters</strong> (CLAHE clip, threshold window, morphology sizes).</li>
+<li>Log the <strong>Tesseract config</strong> and language packs used.</li>
+<li>Keep example images and expected text in-version.</li>
+<li>Add the quick <strong>similarity</strong> check in CI to catch regressions.</li>
+</ul>
+</section>
+<section id="drop-in-function-extract_text_robust" class="level2">
+<h2 class="anchored" data-anchor-id="drop-in-function-extract_text_robust">Drop-in function: <code>extract_text_robust</code></h2>
+<p>Here’s a compact helper you can paste into any notebook or script.</p>
+<div id="9262c3d6" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_text_robust(img_rgb, method<span class="op">=</span><span class="st">"tesseract"</span>, lang<span class="op">=</span><span class="st">"eng"</span>):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    gray <span class="op">=</span> to_gray(img_rgb)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    eq <span class="op">=</span> clahe(gray, clip<span class="op">=</span><span class="fl">3.0</span>, tile<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    den <span class="op">=</span> denoise(eq, ksize<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    bin_img <span class="op">=</span> adaptive_binarize(den, block<span class="op">=</span><span class="dv">31</span>, C<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    desk, _ <span class="op">=</span> deskew(bin_img)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    nolines <span class="op">=</span> remove_lines(desk, scale<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> method <span class="op">==</span> <span class="st">"tesseract"</span>:</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        cfg <span class="op">=</span> <span class="ss">f"--oem 3 --psm 6 -l </span><span class="sc">{</span>lang<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pytesseract.image_to_string(nolines, config<span class="op">=</span>cfg)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"easyocr"</span>:</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        rdr <span class="op">=</span> easyocr.Reader([lang], gpu<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join([r[<span class="dv">1</span>] <span class="cf">for</span> r <span class="kw">in</span> rdr.readtext(cv2.cvtColor(nolines, cv2.COLOR_GRAY2RGB))])</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"method must be 'tesseract' or 'easyocr'"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="final-notes" class="level2">
+<h2 class="anchored" data-anchor-id="final-notes">Final notes</h2>
+<ul>
+<li>This post is designed to run <strong>as-is</strong> in a fresh environment using only synthetic data.</li>
+<li>Drop in real documents by replacing <code>orig_rgb</code> with <code>cv2.imread('path/to/scan.png')[:, :, ::-1]</code> (to convert BGR→RGB).</li>
+<li>If you discover better parameter defaults for your domain (receipts, forms, contracts), save them right in the notebook — future-you will be grateful.</li>
+</ul>
+<p><strong>Happy OCR’ing!</strong></p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/e-landeros\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-landeros">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/e_landeros_">
+      <i class="bi bi-twitter-x" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/flanderos">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.kaggle.com/elanderos">
+      <i class="bi bi-graph-up" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <a href="https://quarto.org/">Quarto</a> © 2023 Fabian Landeros</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fabian">
+<meta name="dcterms.date" content="2024-10-26">
+
+<title>Marketing Mix Model Comparison – elanderos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6331b7a41a3006f6026bec105bbe82ad.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e8e602f557c81bfd4d589c9518bbd3a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8BJ08S4YXX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8BJ08S4YXX', { 'anonymize_ip': true});
+</script>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<meta name="theme-color" content="#1e1e2e">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Marketing Mix Model Comparison – elanderos">
+<meta property="og:description" content="Notes on AI, data, and things I build. By Fabian Landeros.">
+<meta property="og:image" content="https://e-landeros.github.io/posts/marketing-mix-models-compared/thumbnail.png">
+<meta property="og:site_name" content="elanderos">
+<meta property="og:image:height" content="418">
+<meta property="og:image:width" content="527">
+<meta name="twitter:title" content="Marketing Mix Model Comparison – elanderos">
+<meta name="twitter:description" content="Notes on AI, data, and things I build. By Fabian Landeros.">
+<meta name="twitter:image" content="https://e-landeros.github.io/posts/marketing-mix-models-compared/thumbnail.png">
+<meta name="twitter:image-height" content="418">
+<meta name="twitter:image-width" content="527">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">elanderos</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html#recent-writing"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-landeros"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/e_landeros_"> <i class="bi bi-twitter-x" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/flanderos"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.kaggle.com/elanderos"> <i class="bi bi-graph-up" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Marketing Mix Model Comparison</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Marketing Analytics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Fabian </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 26, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#model-1-ordinary-least-squares-ols-regression" id="toc-model-1-ordinary-least-squares-ols-regression" class="nav-link" data-scroll-target="#model-1-ordinary-least-squares-ols-regression">Model 1: Ordinary Least Squares (OLS) Regression</a>
+  <ul class="collapse">
+  <li><a href="#further-visualizations-will-help-us-understand-the-model-better." id="toc-further-visualizations-will-help-us-understand-the-model-better." class="nav-link" data-scroll-target="#further-visualizations-will-help-us-understand-the-model-better.">Further visualizations will help us understand the model better.</a></li>
+  </ul></li>
+  <li><a href="#model-2-bayesian-marketing-mix-modeling" id="toc-model-2-bayesian-marketing-mix-modeling" class="nav-link" data-scroll-target="#model-2-bayesian-marketing-mix-modeling">Model 2: Bayesian Marketing Mix Modeling</a></li>
+  <li><a href="#model-3-machine-learning-for-marketing-mix-modeling" id="toc-model-3-machine-learning-for-marketing-mix-modeling" class="nav-link" data-scroll-target="#model-3-machine-learning-for-marketing-mix-modeling">Model 3: Machine Learning for Marketing Mix Modeling</a></li>
+  <li><a href="#model-comparison-and-selection" id="toc-model-comparison-and-selection" class="nav-link" data-scroll-target="#model-comparison-and-selection">Model Comparison and Selection</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Imagine trying to bake a cake without knowing how much flour, sugar, or eggs to use. You might end up with a disaster! Similarly, in marketing, blindly allocating budgets across different channels is a recipe for wasted resources. That’s where Marketing Mix Modeling (MMM) comes in.</p>
+<p>MMM is a powerful analytical technique that helps marketers understand how each marketing activity contributes to sales or conversions. By quantifying the impact of TV ads, online campaigns, and other initiatives, MMM empowers marketers to optimize their spending and maximize ROI.</p>
+<p>In this blog post, we’ll check out the world of MMM using Python. We’ll explore three different approaches to build these models:</p>
+<ul>
+<li><strong>Ordinary Least Squares (OLS) Regression:</strong> A classic statistical technique for understanding linear relationships.</li>
+<li><strong>Bayesian Modeling:</strong> A more flexible approach that allows us to incorporate prior knowledge and quantify uncertainty.</li>
+<li><strong>Machine Learning:</strong> For capturing complex, non-linear patterns in marketing data.</li>
+</ul>
+<p>We’ll use popular Python libraries like <code>statsmodels</code>, <code>pymc-marketing</code>, and <code>scikit-learn</code> to build our models, and we’ll emphasize visualizations to make the insights clear and actionable.</p>
+<div id="cell-2" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> sm</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the data dictionary with new keys for Google, TikTok, and Facebook spends</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Date'</span>: pd.to_datetime([<span class="st">'2023-01-01'</span>, <span class="st">'2023-01-02'</span>, <span class="st">'2023-01-03'</span>, <span class="st">'2023-01-04'</span>, <span class="st">'2023-01-05'</span>]),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TV'</span>: [<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">120</span>, <span class="dv">180</span>],</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Radio'</span>: [<span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">90</span>],</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Google'</span>: [<span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">40</span>],</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TikTok'</span>: [<span class="dv">15</span>, <span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">35</span>],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Facebook'</span>: [<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">22</span>],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Sales'</span>: [<span class="dv">250</span>, <span class="dv">300</span>, <span class="dv">350</span>, <span class="dv">280</span>, <span class="dv">320</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 50 rows of data</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>num_rows <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Date'</span>: pd.to_datetime([<span class="st">'2023-01-01'</span>] <span class="op">*</span> num_rows) <span class="op">+</span> pd.to_timedelta(np.arange(num_rows), unit<span class="op">=</span><span class="st">'D'</span>),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TV'</span>: np.random.randint(<span class="dv">80</span>, <span class="dv">200</span>, size<span class="op">=</span>num_rows),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Radio'</span>: np.random.randint(<span class="dv">40</span>, <span class="dv">100</span>, size<span class="op">=</span>num_rows),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Google'</span>: np.random.randint(<span class="dv">10</span>, <span class="dv">50</span>, size<span class="op">=</span>num_rows),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TikTok'</span>: np.random.randint(<span class="dv">10</span>, <span class="dv">50</span>, size<span class="op">=</span>num_rows),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Facebook'</span>: np.random.randint(<span class="dv">10</span>, <span class="dv">50</span>, size<span class="op">=</span>num_rows),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Sales'</span>: np.random.randint(<span class="dv">200</span>, <span class="dv">400</span>, size<span class="op">=</span>num_rows)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>df.set_index(<span class="st">'Date'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first 5 rows</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head().to_markdown(index<span class="op">=</span><span class="va">True</span>, numalign<span class="op">=</span><span class="st">"left"</span>, stralign<span class="op">=</span><span class="st">"left"</span>))</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the column names and their data types</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.info())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>| Date                | TV   | Radio   | Google   | TikTok   | Facebook   | Sales   |
+|:--------------------|:-----|:--------|:---------|:---------|:-----------|:--------|
+| 2023-01-01 00:00:00 | 103  | 75      | 27       | 47       | 36         | 237     |
+| 2023-01-02 00:00:00 | 180  | 78      | 42       | 12       | 31         | 279     |
+| 2023-01-03 00:00:00 | 86   | 48      | 11       | 22       | 15         | 366     |
+| 2023-01-04 00:00:00 | 182  | 67      | 29       | 37       | 33         | 205     |
+| 2023-01-05 00:00:00 | 101  | 97      | 11       | 31       | 28         | 207     |
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+DatetimeIndex: 50 entries, 2023-01-01 to 2023-02-19
+Data columns (total 6 columns):
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   TV        50 non-null     int64
+ 1   Radio     50 non-null     int64
+ 2   Google    50 non-null     int64
+ 3   TikTok    50 non-null     int64
+ 4   Facebook  50 non-null     int64
+ 5   Sales     50 non-null     int64
+dtypes: int64(6)
+memory usage: 2.7 KB
+None</code></pre>
+</div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic stats for the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               TV      Radio     Google     TikTok   Facebook      Sales
+count   50.000000  50.000000  50.000000  50.000000  50.000000   50.00000
+mean   137.320000  65.500000  30.000000  32.680000  30.000000  294.28000
+std     33.043842  17.332581  10.879676  10.996177  12.252447   61.88272
+min     84.000000  40.000000  10.000000  10.000000  10.000000  202.00000
+25%    107.500000  50.750000  21.000000  24.000000  18.000000  241.50000
+50%    139.000000  64.000000  28.500000  33.500000  32.000000  284.50000
+75%    165.250000  78.000000  38.000000  42.500000  40.000000  348.75000
+max    191.000000  97.000000  49.000000  49.000000  49.000000  394.00000</code></pre>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EDA Visualizations</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df, x_vars<span class="op">=</span>[<span class="st">'TV'</span>, <span class="st">'Radio'</span>, <span class="st">'Google'</span>, <span class="st">'TikTok'</span>, <span class="st">'Facebook'</span>], y_vars<span class="op">=</span><span class="st">'Sales'</span>, kind<span class="op">=</span><span class="st">'reg'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Pair Plots: A First Glance</strong></p>
+<p>The pair plots provide a visual snapshot of how each marketing channel relates to sales. We can see the individual data points and get a sense of the overall trend.</p>
+<ul>
+<li><strong>Linear Relationships:</strong> TV and Radio seem to have a more linear relationship with Sales – as spending increases, sales tend to increase in a fairly consistent way. This suggests that a simple linear model might be a good starting point for these channels.</li>
+<li><strong>Less Clear-Cut Relationships:</strong> The digital channels (Google, TikTok, and Facebook) show more scattered patterns, making it harder to discern a clear trend. This could indicate non-linear relationships, interactions between channels, or simply more noise in the data. We might need more sophisticated models to capture these complexities.</li>
+</ul>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df.corr(), annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'coolwarm'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Heatmap: Quantifying the Relationships</strong></p>
+<p>The heatmap takes our understanding a step further by quantifying the correlations between each pair of variables.</p>
+<ul>
+<li><strong>Strongest Correlation:</strong> As expected, TV advertising shows the strongest positive correlation with sales. This suggests that TV ads are a significant driver of sales for this business.</li>
+<li><strong>Other Correlations:</strong> Radio also shows a positive correlation with sales, though weaker than TV. Interestingly, the digital channels have weaker correlations, and Facebook even shows a slight negative relationship.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A Note of Caution: Spurious Correlations</strong></p>
+<p>It’s important to remember that correlation doesn’t necessarily equal causation. The negative correlation with Facebook might be a “spurious correlation,” meaning it’s likely due to random chance or other factors not captured in our dataset, rather than a true negative impact of Facebook advertising. With limited data, it’s easier to observe misleading correlations.</p>
+</div>
+</div>
+</section>
+<section id="model-1-ordinary-least-squares-ols-regression" class="level1">
+<h1>Model 1: Ordinary Least Squares (OLS) Regression</h1>
+<p>OLS regression is a workhorse of statistical modeling. It assumes a linear relationship between the predictor variables (marketing spends) and the outcome variable (sales). We’ll fit a model of the form:</p>
+<p><code>Sales = b0 + b1 * TV + b2 * Radio + b3 * Google + b4 * TikTok + b5 * Facebook + error</code></p>
+<p>where the <em>b</em> coefficients represent the impact of each channel on sales.</p>
+<div id="cell-9" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the OLS model</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_ols <span class="op">=</span> sm.ols(formula<span class="op">=</span><span class="st">'Sales ~ TV + Radio + Google + TikTok + Facebook'</span>, data<span class="op">=</span>df).fit()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the model summary</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_ols.summary())</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Sales   R-squared:                       0.086
+Model:                            OLS   Adj. R-squared:                 -0.018
+Method:                 Least Squares   F-statistic:                    0.8263
+Date:                Wed, 24 Jun 2026   Prob (F-statistic):              0.538
+Time:                        15:40:08   Log-Likelihood:                -274.46
+No. Observations:                  50   AIC:                             560.9
+Df Residuals:                      44   BIC:                             572.4
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    325.4264     77.774      4.184      0.000     168.684     482.169
+TV             0.0522      0.282      0.185      0.854      -0.516       0.620
+Radio         -0.4676      0.532     -0.879      0.384      -1.540       0.605
+Google         0.7181      0.886      0.811      0.422      -1.067       2.504
+TikTok        -1.2681      0.825     -1.536      0.132      -2.932       0.395
+Facebook       0.4073      0.776      0.525      0.602      -1.156       1.971
+==============================================================================
+Omnibus:                       32.601   Durbin-Watson:                   1.894
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                4.665
+Skew:                           0.199   Prob(JB):                       0.0970
+Kurtosis:                       1.558   Cond. No.                     1.44e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.44e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The OLS model summary provides us with key information:</p>
+<ul>
+<li><strong>Coefficients:</strong> These tell us the estimated increase in sales for a one-unit increase in spending on each channel, holding other variables constant. For example, a positive coefficient for TV indicates that increasing TV advertising is associated with higher sales.</li>
+<li><strong>R-squared:</strong> This measures the proportion of variance in sales explained by the model. A higher R-squared indicates a better fit.</li>
+<li><strong>P-values:</strong> These help us assess the statistical significance of each coefficient. Low p-values (typically below 0.05) suggest that the corresponding channel has a statistically significant impact on sales.</li>
+</ul>
+</div>
+</div>
+<p>The OLS regression model indicates that TV advertising has a statistically significant positive effect on sales, while the impact of other marketing channels remains uncertain; however, the low R-squared suggests that this model explains only a small portion of the variability in sales, and potential multicollinearity warrants further investigation.</p>
+<section id="further-visualizations-will-help-us-understand-the-model-better." class="level3">
+<h3 class="anchored" data-anchor-id="further-visualizations-will-help-us-understand-the-model-better.">Further visualizations will help us understand the model better.</h3>
+<div id="cell-13" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizations</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Regression plot (example with TV)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'TV'</span>, y<span class="op">=</span><span class="st">'Sales'</span>, data<span class="op">=</span>df)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The regression plot shows the fitted line and the data points for a specific channel (TV in this case).</p>
+<div id="cell-15" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Residual plot</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(model_ols.fittedvalues, model_ols.resid)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fitted Values'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Residual Plot'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residual plot helps us check the assumptions of the OLS model. Ideally, the residuals should be randomly scattered around zero.</p>
+<div id="cell-17" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Actual vs. Predicted</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(model_ols.fittedvalues, df[<span class="st">'Sales'</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted Sales'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Actual Sales'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Actual vs. Predicted Sales'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The actual vs.&nbsp;predicted plot shows how well the model predicts sales. A good model will have points clustered closely around the diagonal line.</p>
+</section>
+</section>
+<section id="model-2-bayesian-marketing-mix-modeling" class="level1">
+<h1>Model 2: Bayesian Marketing Mix Modeling</h1>
+<p>While OLS regression provides a good starting point, Bayesian methods offer a more flexible and nuanced approach. They allow us to:</p>
+<ul>
+<li><strong>Incorporate prior knowledge:</strong> We can include our existing beliefs about the effectiveness of different marketing channels.</li>
+<li><strong>Quantify uncertainty:</strong> Instead of point estimates, we get probability distributions for the model parameters, giving us a better understanding of the range of possible values.</li>
+</ul>
+<p>We’ll use the <code>pymc</code> library, which provides tools specifically designed for Bayesian MMM.</p>
+<div id="cell-20" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data for PyMC</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'TV'</span>, <span class="st">'Radio'</span>, <span class="st">'Google'</span>, <span class="st">'TikTok'</span>, <span class="st">'Facebook'</span>]]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Sales'</span>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Bayesian model</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> model_bayesian:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Priors for the coefficients (weakly informative priors)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    intercept <span class="op">=</span> pm.Normal(<span class="st">'intercept'</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    beta_tv <span class="op">=</span> pm.HalfNormal(<span class="st">'beta_tv'</span>, sigma<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Assuming a non-negative effect of TV</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    beta_radio <span class="op">=</span> pm.HalfNormal(<span class="st">'beta_radio'</span>, sigma<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    beta_google <span class="op">=</span> pm.Normal(<span class="st">'beta_google'</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    beta_tiktok <span class="op">=</span> pm.Normal(<span class="st">'beta_tiktok'</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    beta_facebook <span class="op">=</span> pm.Normal(<span class="st">'beta_facebook'</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Linear model</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> intercept <span class="op">+</span> beta_tv<span class="op">*</span>X[<span class="st">'TV'</span>] <span class="op">+</span> beta_radio<span class="op">*</span>X[<span class="st">'Radio'</span>] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>         beta_google<span class="op">*</span>X[<span class="st">'Google'</span>] <span class="op">+</span> beta_tiktok<span class="op">*</span>X[<span class="st">'TikTok'</span>] <span class="op">+</span> beta_facebook<span class="op">*</span>X[<span class="st">'Facebook'</span>] </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Likelihood (assuming sales are normally distributed)</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> pm.HalfNormal(<span class="st">'sigma'</span>, sigma<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    likelihood <span class="op">=</span> pm.Normal(<span class="st">'likelihood'</span>, mu<span class="op">=</span>mu, sigma<span class="op">=</span>sigma, observed<span class="op">=</span>y)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample from the posterior distribution</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    trace <span class="op">=</span> pm.sample(<span class="dv">2000</span>, tune<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze the results</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>pm.summary(trace)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizations</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Trace plots</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>pm.plot_trace(trace) </span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Posterior distributions</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>pm.plot_posterior(trace) </span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>WARNING (pytensor.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
+Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [intercept, beta_tv, beta_radio, beta_google, beta_tiktok, beta_facebook, sigma]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"8b9754da58194fc1bf690b1b723a53b8","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 15 seconds.
+There were 9 divergences after tuning. Increase `target_accept` or reparameterize.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-5.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-6.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s dive deeper into how this Bayesian model works. It’s like being a detective with some initial hunches (priors), gathering evidence (data), and updating your beliefs (posteriors) to crack the case of how marketing drives sales.</p>
+<p><strong>1. Setting the Stage: Priors</strong></p>
+<p>Think of priors as our starting assumptions about the influence of each marketing channel. We’ve used “weakly informative priors” here. It’s like saying, “We don’t have strong opinions yet, but we generally expect marketing to have a positive effect, though we’re open to being surprised.” For example, we used a <code>HalfNormal</code> distribution for TV and Radio, suggesting we expect their coefficients to be positive (more spending likely leads to more sales).</p>
+<p><strong>2. The Plot Thickens: Likelihood</strong></p>
+<p>The likelihood function is our detective’s magnifying glass – it helps us examine how well our model explains the observed sales data. We assume our sales data follows a normal distribution, with the mean influenced by our marketing spends.</p>
+<p><strong>3. The Investigation Unfolds: MCMC</strong></p>
+<p>Now, the exciting part! We use a technique called Markov Chain Monte Carlo (MCMC) – imagine our detective exploring different scenarios and gathering clues. MCMC helps us explore the vast space of possible parameter values and figure out which combinations best fit our data and priors. <code>pm.sample()</code> is our detective’s trusty sidekick, doing the legwork of this exploration.</p>
+<p><strong>4. Cracking the Case: Posteriors</strong></p>
+<p>After a thorough investigation (MCMC sampling), we get the posterior distributions – our updated beliefs about the impact of each marketing channel. <code>pm.summary()</code> neatly summarizes these distributions, giving us the average estimated effect, the uncertainty around it, and credible intervals (like a confidence interval, but with a Bayesian twist).</p>
+<p><strong>5. Visualizing the Evidence</strong></p>
+<p>Finally, we visualize our findings!</p>
+<p><strong>Trace Plots: Following the Detective’s Trail</strong></p>
+<p>Imagine our detective meticulously documenting every step of their investigation in a notebook. That’s essentially what a trace plot is – a visual record of the MCMC algorithm’s journey as it explores the parameter space.</p>
+<ul>
+<li><strong>What to look for:</strong>
+<ul>
+<li><strong>Convergence:</strong> We want to see the trace plot resemble a “hairy caterpillar” – a dense band of lines meandering around a central value. This indicates that the algorithm has “converged,” meaning it has settled into a stable region of the parameter space and is reliably sampling from the posterior distribution.</li>
+<li><strong>No trends or patterns:</strong> If we see clear trends (upward, downward) or repeating patterns, it suggests the algorithm might be stuck and not exploring the full posterior.</li>
+<li><strong>Good mixing:</strong> The lines should jump around frequently, indicating the algorithm is efficiently exploring different possibilities. If the lines get stuck in one area for a long time, it suggests poor mixing.</li>
+</ul></li>
+<li><strong>Why it matters:</strong>
+<ul>
+<li><strong>Reliability:</strong> Convergence assures us that the samples we’re getting are representative of the true posterior distribution. Without convergence, our inferences about the model parameters might be misleading.</li>
+<li><strong>Diagnosing problems:</strong> Trace plots can help us identify issues with the model or the MCMC settings. For example, if we see poor mixing, we might need to adjust the algorithm’s parameters or re-evaluate our model.</li>
+</ul></li>
+</ul>
+<p><strong>Posterior Distributions: Visualizing the Range of Possibilities</strong></p>
+<p>Posterior distributions are the culmination of our Bayesian investigation. They show us the range of plausible values for each parameter after considering both our prior knowledge and the evidence from the data.</p>
+<ul>
+<li><strong>What to look for:</strong>
+<ul>
+<li><strong>Shape:</strong> The shape of the distribution tells us about the uncertainty and the most likely values. A narrow, peaked distribution indicates high certainty, while a wide, spread-out distribution suggests more uncertainty.</li>
+<li><strong>Location:</strong> The center of the distribution gives us the most likely value of the parameter.</li>
+<li><strong>Credible intervals:</strong> These intervals (often shown as shaded regions) give us a range of values where the parameter is likely to fall with a certain probability (e.g., 95% credible interval).</li>
+</ul></li>
+<li><strong>Why it matters:</strong>
+<ul>
+<li><strong>Quantifying uncertainty:</strong> Unlike traditional methods that give us single point estimates, Bayesian models provide a full picture of uncertainty. This is crucial for making informed decisions, as it allows us to account for the range of possible outcomes.</li>
+<li><strong>Comparing parameters:</strong> We can compare the posterior distributions of different parameters to see which ones have a stronger influence on the outcome.</li>
+<li><strong>Making predictions:</strong> We can use the posterior distributions to generate predictions and assess their uncertainty.</li>
+</ul></li>
+</ul>
+<p><strong>In essence:</strong></p>
+<ul>
+<li>Trace plots help us assess the <em>process</em> of Bayesian inference (MCMC sampling).</li>
+<li>Posterior distributions show us the <em>results</em> of that inference – our updated knowledge about the model parameters.</li>
+</ul>
+<p>By carefully examining these visualizations, we can gain a deeper understanding of our Bayesian model, assess its reliability, and draw meaningful conclusions about the relationships between marketing activities and sales.</p>
+</section>
+<section id="model-3-machine-learning-for-marketing-mix-modeling" class="level1">
+<h1>Model 3: Machine Learning for Marketing Mix Modeling</h1>
+<p>Machine learning models can capture more complex relationships in the data, such as non-linear effects and interactions between marketing channels. We’ll use a Random Forest Regressor, a powerful ensemble method known for its predictive accuracy.</p>
+<p>Machine learning models are like the sophisticated detectives of the data world. They can uncover complex patterns and relationships that might be missed by simpler methods. Here, we’ll use a Random Forest Regressor – imagine a team of detectives, each with a slightly different perspective, combining their insights to solve the case.</p>
+<p><strong>1. Training and Testing: A Detective’s Prep Work</strong></p>
+<p>Before our detective team tackles the case, they need some practice. We split our data into two sets:</p>
+<ul>
+<li><strong>Training set:</strong> This is where the detectives hone their skills. They study the relationships between marketing spends and sales, learning the patterns and nuances.</li>
+<li><strong>Testing set:</strong> This is the real test. The detectives apply their learned knowledge to a new set of data, allowing us to see how well they generalize to unseen situations.</li>
+</ul>
+<p><strong>2. Building the Model: Assembling the Detective Team</strong></p>
+<p>We train our Random Forest model – essentially, we assemble our team of detective “trees,” each specializing in a different aspect of the data. They work together, combining their individual predictions to arrive at a final, more accurate prediction.</p>
+<p><strong>3. Evaluating Performance: Assessing the Detectives’ Accuracy</strong></p>
+<p>How good are our detectives at predicting sales? We use metrics like:</p>
+<ul>
+<li><strong>Mean Squared Error (MSE):</strong> This measures the average squared difference between the predicted and actual sales. A lower MSE means better accuracy.</li>
+<li><strong>R-squared:</strong> This tells us the proportion of variance in sales explained by the model. A higher R-squared indicates a better fit.</li>
+</ul>
+<p><strong>4. Feature Importance: Identifying the Key Clues</strong></p>
+<p>Our detective team can also tell us which clues are most important in solving the case. Feature importance scores reveal which marketing channels have the strongest influence on sales. This helps us prioritize our marketing efforts and allocate resources effectively.</p>
+<p><strong>5. Partial Dependence Plots: Isolating the Effects</strong></p>
+<p>Partial dependence plots are like isolating a suspect for questioning. They help us understand the relationship between a specific marketing channel (e.g., TV) and sales, while holding other channels constant. This allows us to see the unique contribution of each channel, independent of the others.”</p>
+<div id="cell-24" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and testing sets</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the Random Forest model</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>model_rf <span class="op">=</span> RandomForestRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>model_rf.fit(X_train, y_train)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model_rf.predict(X_test)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean Squared Error: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'R-squared: </span><span class="sc">{</span>r2<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean Squared Error: 4210.889359999999
+R-squared: -0.8662311687851225</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizations</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Feature importance</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> model_rf.feature_importances_</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> X.columns</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argsort(importances)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Feature Importances'</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(indices)), importances[indices], color<span class="op">=</span><span class="st">'b'</span>, align<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(indices)), [features[i] <span class="cf">for</span> i <span class="kw">in</span> indices])</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Relative Importance'</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> PartialDependenceDisplay</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>display <span class="op">=</span> PartialDependenceDisplay.from_estimator(model_rf, X_train, features<span class="op">=</span>[<span class="dv">0</span>]) <span class="co"># 0 represents 'TV'</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>display.plot()</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-12-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-12-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-comparison-and-selection" class="level1">
+<h1>Model Comparison and Selection</h1>
+<p>We’ve now explored three different approaches to marketing mix modeling: OLS regression, Bayesian modeling, and a machine learning model (Random Forest). Each has its own strengths and weaknesses:</p>
+<ul>
+<li><strong>OLS Regression:</strong> Simple, interpretable, but assumes linearity and might be sensitive to outliers.</li>
+<li><strong>Bayesian Modeling:</strong> More flexible, incorporates prior knowledge, quantifies uncertainty, but can be computationally more intensive.</li>
+<li><strong>Machine Learning:</strong> Can capture complex relationships, often has high predictive accuracy, but can be less interpretable.</li>
+</ul>
+<p>To choose the best model, consider the following:</p>
+<ul>
+<li><strong>Data complexity:</strong> For simple, linear relationships, OLS might suffice. For more complex patterns, consider Bayesian or machine learning models.</li>
+<li><strong>Interpretability:</strong> If understanding the drivers of sales is crucial, OLS and Bayesian models are generally more interpretable.</li>
+<li><strong>Predictive accuracy:</strong> If the primary goal is accurate prediction, machine learning models often excel.</li>
+<li><strong>Business context:</strong> The choice should align with the specific business needs and the level of sophistication required.</li>
+</ul>
+<p>In our example, let’s say interpretability is key. We might favor the Bayesian model because it provides probability distributions for the coefficients, giving us a better understanding of the uncertainty associated with the estimates. However, if we had a large dataset with complex interactions, the Random Forest might be a strong contender.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Marketing mix modeling is a vital tool for data-driven marketers. By quantifying the impact of different marketing activities, MMM enables informed decision-making, budget optimization, and ROI maximization.</p>
+<p>In this post, we journeyed through three different MMM approaches in Python, highlighting the importance of data exploration, model selection, and result interpretation. Remember, the best model depends on your specific needs and data characteristics.</p>
+<p>By embracing these techniques, marketers can move beyond guesswork and allocate resources strategically, driving business growth and success.</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/e-landeros\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-landeros">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/e_landeros_">
+      <i class="bi bi-twitter-x" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/flanderos">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.kaggle.com/elanderos">
+      <i class="bi bi-graph-up" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <a href="https://quarto.org/">Quarto</a> © 2023 Fabian Landeros</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

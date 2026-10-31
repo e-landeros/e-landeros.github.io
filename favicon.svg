@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="elanderos">
+  <rect width="64" height="64" rx="14" fill="#11111b" stroke="#313244" stroke-width="2"/>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+        font-size="38" font-weight="700"><tspan fill="#cba6f7">e</tspan><tspan fill="#89dceb">_</tspan></text>
+</svg>

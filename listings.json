@@ -1,0 +1,32 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/neural-network-from-scratch/index.html",
+      "/posts/Logistic-regression-from-scratch/index.html",
+      "/posts/automating-b2b-leadgen-with-ai/index.html",
+      "/posts/contextual-bandit-UCB/index.html",
+      "/posts/collaborative-filtering-review/index.html",
+      "/posts/vector-search-anomaly-detection/index.html",
+      "/posts/OCR-pipelines-refresher/index.html",
+      "/posts/pydantic-ai-agent-patterns/index.html",
+      "/posts/cs-agents-pydantic/index.html",
+      "/posts/marketing-mix-models-compared/index.html",
+      "/posts/identifying-fraud/index.html",
+      "/posts/modeling-email-campaign-effectiveness/index.html",
+      "/posts/mdp-a-marketing-perspective/index.html",
+      "/posts/ad-optimization-with-multi-armed-bandits/index.html",
+      "/posts/building-and-optimizing-a-customer-segmentation-model/index.html",
+      "/posts/multi-armed-bandits/index.html",
+      "/posts/mdp-in-rl/index.html",
+      "/posts/the-bellman-equation-in-drl/index.html",
+      "/posts/marketing-mix-modeling/index.html",
+      "/posts/statistics/index.html",
+      "/posts/gradient-descent/index.html",
+      "/posts/navigating-the-llm-landscape/index.html",
+      "/posts/data-discretization/index.html",
+      "/posts/ab-testing-tips/index.html",
+      "/posts/ab-testing-demystified/index.html"
+    ]
+  }
+]

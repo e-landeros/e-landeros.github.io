@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fabian">
+<meta name="dcterms.date" content="2025-01-19">
+
+<title>Building Intelligent Customer Service Agents with Pydantic-AI and LLMs – elanderos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6331b7a41a3006f6026bec105bbe82ad.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e8e602f557c81bfd4d589c9518bbd3a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8BJ08S4YXX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8BJ08S4YXX', { 'anonymize_ip': true});
+</script>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<meta name="theme-color" content="#1e1e2e">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Building Intelligent Customer Service Agents with Pydantic-AI and LLMs – elanderos">
+<meta property="og:description" content="Notes on AI, data, and things I build. By Fabian Landeros.">
+<meta property="og:image" content="https://e-landeros.github.io/posts/cs-agents-pydantic/pydantic.png">
+<meta property="og:site_name" content="elanderos">
+<meta property="og:image:height" content="150">
+<meta property="og:image:width" content="558">
+<meta name="twitter:title" content="Building Intelligent Customer Service Agents with Pydantic-AI and LLMs – elanderos">
+<meta name="twitter:description" content="Notes on AI, data, and things I build. By Fabian Landeros.">
+<meta name="twitter:image" content="https://e-landeros.github.io/posts/cs-agents-pydantic/pydantic.png">
+<meta name="twitter:image-height" content="150">
+<meta name="twitter:image-width" content="558">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">elanderos</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html#recent-writing"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-landeros"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/e_landeros_"> <i class="bi bi-twitter-x" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/flanderos"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.kaggle.com/elanderos"> <i class="bi bi-graph-up" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Building Intelligent Customer Service Agents with Pydantic-AI and LLMs</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">AI Agents</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Fabian </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 19, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-unleashing-the-power-of-llms-for-customer-service" id="toc-introduction-unleashing-the-power-of-llms-for-customer-service" class="nav-link active" data-scroll-target="#introduction-unleashing-the-power-of-llms-for-customer-service">Introduction: Unleashing the Power of LLMs for Customer Service</a></li>
+  <li><a href="#setting-up-the-development-environment" id="toc-setting-up-the-development-environment" class="nav-link" data-scroll-target="#setting-up-the-development-environment">1. Setting Up the Development Environment</a></li>
+  <li><a href="#defining-our-data-models" id="toc-defining-our-data-models" class="nav-link" data-scroll-target="#defining-our-data-models">2. Defining Our Data Models</a>
+  <ul class="collapse">
+  <li><a href="#explanation-data-models" id="toc-explanation-data-models" class="nav-link" data-scroll-target="#explanation-data-models">Explanation: Data Models</a></li>
+  <li><a href="#why-this-matters-the-benefits-of-pydantic-models" id="toc-why-this-matters-the-benefits-of-pydantic-models" class="nav-link" data-scroll-target="#why-this-matters-the-benefits-of-pydantic-models">Why This Matters: The Benefits of Pydantic Models</a></li>
+  </ul></li>
+  <li><a href="#implementing-the-database-layer" id="toc-implementing-the-database-layer" class="nav-link" data-scroll-target="#implementing-the-database-layer">3. Implementing the Database Layer</a>
+  <ul class="collapse">
+  <li><a href="#explanation-the-database-layer" id="toc-explanation-the-database-layer" class="nav-link" data-scroll-target="#explanation-the-database-layer">Explanation: The Database Layer</a></li>
+  </ul></li>
+  <li><a href="#building-the-agent-tools" id="toc-building-the-agent-tools" class="nav-link" data-scroll-target="#building-the-agent-tools">4. Building the Agent Tools</a>
+  <ul class="collapse">
+  <li><a href="#explanation-agent-definition-and-tools" id="toc-explanation-agent-definition-and-tools" class="nav-link" data-scroll-target="#explanation-agent-definition-and-tools">Explanation: Agent Definition and Tools</a></li>
+  </ul></li>
+  <li><a href="#orchestrating-customer-inquiries-with-handle_customer_inquiry" id="toc-orchestrating-customer-inquiries-with-handle_customer_inquiry" class="nav-link" data-scroll-target="#orchestrating-customer-inquiries-with-handle_customer_inquiry">5. Orchestrating Customer Inquiries with handle_customer_inquiry</a>
+  <ul class="collapse">
+  <li><a href="#explanation-handling-customer-inquiries" id="toc-explanation-handling-customer-inquiries" class="nav-link" data-scroll-target="#explanation-handling-customer-inquiries">Explanation: Handling Customer Inquiries</a></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together-running-a-customer-inquiry" id="toc-putting-it-all-together-running-a-customer-inquiry" class="nav-link" data-scroll-target="#putting-it-all-together-running-a-customer-inquiry">6. Putting it All Together: Running a Customer Inquiry</a>
+  <ul class="collapse">
+  <li><a href="#explanation-running-the-inquiry" id="toc-explanation-running-the-inquiry" class="nav-link" data-scroll-target="#explanation-running-the-inquiry">Explanation: Running the Inquiry</a></li>
+  </ul></li>
+  <li><a href="#error-handling-and-validation" id="toc-error-handling-and-validation" class="nav-link" data-scroll-target="#error-handling-and-validation">6. Error Handling and Validation</a></li>
+  <li><a href="#testing-the-agent" id="toc-testing-the-agent" class="nav-link" data-scroll-target="#testing-the-agent">7. Testing the Agent</a>
+  <ul class="collapse">
+  <li><a href="#explanation-testing-the-agent" id="toc-explanation-testing-the-agent" class="nav-link" data-scroll-target="#explanation-testing-the-agent">Explanation: Testing the Agent</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction-unleashing-the-power-of-llms-for-customer-service" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-unleashing-the-power-of-llms-for-customer-service">Introduction: Unleashing the Power of LLMs for Customer Service</h2>
+<p>Man I was blown away by how simple and effective building agents in pydantic has been for me this weekend.</p>
+<p>The promise of AI-powered customer service is finally within reach. This tutorial demonstrates how to build an intelligent customer service agent using <strong>Pydantic-AI</strong>, a framework that elegantly marries the robustness of Pydantic’s type safety with the sophisticated reasoning capabilities of Large Language Models (LLMs).</p>
+<p>This tutorial will show you how to build an intelligent customer service agent using Pydantic-AI, a powerful framework that combines the type safety of Pydantic with the capabilities of Large Language Models (LLMs).</p>
+<p>Tired of brittle, hard-coded bots? I’ll guide you through building a complete customer service solution capable of:</p>
+<ul>
+<li><strong>Looking up customer orders:</strong> Quickly retrieve order details based on customer ID.</li>
+<li><strong>Handling support tickets:</strong> Access and manage customer support requests efficiently.</li>
+<li><strong>Accessing customer information:</strong> Securely retrieve customer profiles.</li>
+<li><strong>Processing returns and refunds:</strong> Automate return and refund processes.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pydantic.png" class="img-fluid figure-img"></p>
+<figcaption>Pydantic Image</figcaption>
+</figure>
+</div>
+<p>https://github.com/pydantic/pydantic-ai</p>
+</section>
+<section id="setting-up-the-development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-development-environment">1. Setting Up the Development Environment</h2>
+<p>First, let’s set up our development environment with the necessary dependencies:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pydantic-ai</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We’ll also need to install and run Ollama locally for our LLM backend. just use brew install ollama and then download your model of choice.</p>
+<p>note: Pydnatic was updated halfway thorugh tihis tutorial and the Ollama model is broken so I had to update the code to use the OpenAI model.</p>
+<p>This code snippet does the following:</p>
+<ol type="1">
+<li><strong>Imports Necessary Libraries:</strong> Imports modules from pydantic-ai, pydantic, typing, datetime, and dotenv.</li>
+<li><strong>Loads Environment Variables:</strong> The load_dotenv() function reads the .env file and sets the environment variables.</li>
+<li><strong>Retrieves API Key:</strong> os.environ.get(“OPENAI_API_KEY”) retrieves the API key from the environment.</li>
+<li><strong>Error Handling:</strong> It checks if the OPENAI_API_KEY is set and raises a ValueError if it’s missing. <em>This is crucial for preventing your code from running without proper authorization.</em></li>
+<li><strong>Initializes the LLM:</strong> Creates an instance of <code>OpenAIModel</code>, specifying the model name and API key. You can change the <code>model_name</code> to any other OpenAI model you have access to (e.g., ‘gpt-3.5-turbo’, ‘gpt-4’).</li>
+<li><strong>Applies nest_asyncio:</strong> Applies nest_asyncio to allow the use of asyncio event loops within a Jupyter Notebook environment.</li>
+</ol>
+<div id="cell-7" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic_ai <span class="im">import</span> Agent, RunContext, ModelRetry</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic_ai.models.openai <span class="im">import</span> OpenAIModel  <span class="co"># Changed import</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel, Field</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Dict, Any, Literal</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> ValidationError</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nest_asyncio</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>nest_asyncio.<span class="bu">apply</span>()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Load environment variables from .env file</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the OpenAI API key from the environment variable</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>OPENAI_API_KEY <span class="op">=</span> os.environ.get(<span class="st">"OPENAI_API_KEY"</span>)  </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> OPENAI_API_KEY:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"OPENAI_API_KEY environment variable not set."</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize our LLM model</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> OpenAIModel( </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    model_name<span class="op">=</span><span class="st">'gpt-4o-mini'</span>, </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    api_key<span class="op">=</span>OPENAI_API_KEY,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="defining-our-data-models" class="level2">
+<h2 class="anchored" data-anchor-id="defining-our-data-models">2. Defining Our Data Models</h2>
+<p>Let’s expand on your initial code to create a more comprehensive data model structure.</p>
+<p>Pydantic’s power lies in its ability to define data structures with type annotations. These models not only provide runtime validation but also act as a contract between your code and the LLM. Let’s define our data models:</p>
+<div id="cell-9" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Customer(BaseModel):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">id</span>: <span class="bu">int</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    name: <span class="bu">str</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    email: <span class="bu">str</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    join_date: date</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> OrderItem(BaseModel):</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    item_id: <span class="bu">int</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    name: <span class="bu">str</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    quantity: <span class="bu">int</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    price: <span class="bu">float</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Order(BaseModel):</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    order_id: <span class="bu">int</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    customer_id: <span class="bu">int</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    items: List[OrderItem]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    total: <span class="bu">float</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    status: Literal[<span class="st">'pending'</span>, <span class="st">'shipped'</span>, <span class="st">'delivered'</span>, <span class="st">'returned'</span>]</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    order_date: date</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SupportTicket(BaseModel):</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    ticket_id: <span class="bu">int</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    customer_id: <span class="bu">int</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    order_id: <span class="bu">int</span> <span class="op">|</span> <span class="va">None</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    subject: <span class="bu">str</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    description: <span class="bu">str</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    status: Literal[<span class="st">'open'</span>, <span class="st">'in_progress'</span>, <span class="st">'resolved'</span>, <span class="st">'closed'</span>]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    priority: Literal[<span class="st">'low'</span>, <span class="st">'medium'</span>, <span class="st">'high'</span>, <span class="st">'urgent'</span>]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    created_date: date</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="explanation-data-models" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-data-models">Explanation: Data Models</h3>
+<ul>
+<li><strong>Customer:</strong> Represents a customer with attributes like id, name, email, and join_date. The id is an integer, the name and email are strings, and the join date is a date object.</li>
+<li><strong>OrderItem:</strong> Represents an item in an order with item_id, name, quantity, and price.</li>
+<li><strong>Order:</strong> Represents a customer order with order_id, customer_id, a list of OrderItem objects, total amount, status, and order_date. The status field uses Literal to enforce that it can only be one of the specified values (‘pending’, ‘shipped’, ‘delivered’, ‘returned’).</li>
+<li><strong>SupportTicket:</strong> Represents a support ticket with ticket_id, customer_id, order_id (optional), subject, description, status, priority, and created_date. The priority field is also constrained using Literal.</li>
+<li><strong>order_id: int | None</strong>: The use of int | None signifies a union type, indicating that order_id can be an integer or None. This accommodates cases where a support ticket might not be related to a specific order.</li>
+</ul>
+</section>
+<section id="why-this-matters-the-benefits-of-pydantic-models" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-matters-the-benefits-of-pydantic-models">Why This Matters: The Benefits of Pydantic Models</h3>
+<ul>
+<li><strong>Type Safety:</strong> Pydantic enforces type annotations at runtime. If you try to assign the wrong type to an attribute, Pydantic will raise a <code>ValidationError</code>. <em>This is a huge advantage over dynamically typed languages like Python alone, where type errors might only be caught at runtime.</em></li>
+<li><strong>Auto-completion:</strong> Your IDE leverages the type information to provide intelligent code completion, reducing errors and speeding up development.</li>
+<li><strong>Documentation:</strong> Pydantic models serve as a form of self-documenting code. The model definitions clearly show the structure and expected data types.</li>
+<li><strong>AI Understanding:</strong> The LLM can better understand the structure of your data when it’s defined using Pydantic models. This enables the LLM to generate more accurate and relevant responses.</li>
+<li><strong>Data Validation:</strong> Data coming from external sources are validated using the pydantic models.</li>
+</ul>
+<p>For this example, we’ll simulate a database using Python dictionaries. In a real-world application, you would likely connect to a real database like PostgreSQL or MySQL.</p>
+</section>
+</section>
+<section id="implementing-the-database-layer" class="level2">
+<h2 class="anchored" data-anchor-id="implementing-the-database-layer">3. Implementing the Database Layer</h2>
+<p>Let’s enhance your OrderDatabase class to handle our expanded data models:</p>
+<div id="cell-13" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CustomerServiceDatabase:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Simulated database tables</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.customers: Dict[<span class="bu">int</span>, Customer] <span class="op">=</span> {}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.orders: Dict[<span class="bu">int</span>, List[Order]] <span class="op">=</span> {}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tickets: Dict[<span class="bu">int</span>, List[SupportTicket]] <span class="op">=</span> {}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Initialize with some sample data</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._init_sample_data()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="kw">def</span> get_customer(<span class="va">self</span>, customer_id: <span class="bu">int</span>) <span class="op">-&gt;</span> Customer:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> customer_id <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.customers:</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> ModelRetry(<span class="ss">f"Customer not found: </span><span class="sc">{</span>customer_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.customers[customer_id]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="kw">def</span> get_orders(<span class="va">self</span>, customer_id: <span class="bu">int</span>) <span class="op">-&gt;</span> List[Order]:</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> customer_id <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.orders:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> []</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.orders[customer_id]</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="kw">def</span> get_tickets(<span class="va">self</span>, customer_id: <span class="bu">int</span>) <span class="op">-&gt;</span> List[SupportTicket]:</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> customer_id <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.tickets:</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> []</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.tickets[customer_id]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="kw">def</span> create_ticket(<span class="va">self</span>, ticket: SupportTicket) <span class="op">-&gt;</span> SupportTicket:</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ticket.customer_id <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.customers:</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> ModelRetry(<span class="st">"Invalid customer ID"</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        customer_tickets <span class="op">=</span> <span class="va">self</span>.tickets.get(ticket.customer_id, [])</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        customer_tickets.append(ticket)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tickets[ticket.customer_id] <span class="op">=</span> customer_tickets</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ticket</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _init_sample_data(<span class="va">self</span>):</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add sample customers, orders, and tickets for testing</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.customers[<span class="dv">1</span>] <span class="op">=</span> Customer(<span class="bu">id</span><span class="op">=</span><span class="dv">1</span>, name<span class="op">=</span><span class="st">"Alice Smith"</span>, email<span class="op">=</span><span class="st">"alice.smith@example.com"</span>, join_date<span class="op">=</span>date(<span class="dv">2024</span>, <span class="dv">1</span>, <span class="dv">15</span>))</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.orders[<span class="dv">1</span>] <span class="op">=</span> [</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            Order(order_id<span class="op">=</span><span class="dv">101</span>, customer_id<span class="op">=</span><span class="dv">1</span>, items<span class="op">=</span>[OrderItem(item_id<span class="op">=</span><span class="dv">201</span>, name<span class="op">=</span><span class="st">"Laptop"</span>, quantity<span class="op">=</span><span class="dv">1</span>, price<span class="op">=</span><span class="fl">1200.00</span>)], total<span class="op">=</span><span class="fl">1200.00</span>, status<span class="op">=</span><span class="st">"shipped"</span>, order_date<span class="op">=</span>date(<span class="dv">2024</span>, <span class="dv">11</span>, <span class="dv">10</span>)),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            Order(order_id<span class="op">=</span><span class="dv">102</span>, customer_id<span class="op">=</span><span class="dv">1</span>, items<span class="op">=</span>[OrderItem(item_id<span class="op">=</span><span class="dv">202</span>, name<span class="op">=</span><span class="st">"Keyboard"</span>, quantity<span class="op">=</span><span class="dv">1</span>, price<span class="op">=</span><span class="fl">75.00</span>)], total<span class="op">=</span><span class="fl">75.00</span>, status<span class="op">=</span><span class="st">"delivered"</span>, order_date<span class="op">=</span>date(<span class="dv">2024</span>, <span class="dv">11</span>, <span class="dv">15</span>))</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tickets[<span class="dv">1</span>] <span class="op">=</span> [</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>            SupportTicket(ticket_id<span class="op">=</span><span class="dv">301</span>, customer_id<span class="op">=</span><span class="dv">1</span>, order_id<span class="op">=</span><span class="dv">101</span>, subject<span class="op">=</span><span class="st">"Shipping Issue"</span>, description<span class="op">=</span><span class="st">"Laptop never arrived"</span>, status<span class="op">=</span><span class="st">"open"</span>, priority<span class="op">=</span><span class="st">"high"</span>, created_date<span class="op">=</span>date(<span class="dv">2024</span>, <span class="dv">12</span>, <span class="dv">1</span>))</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="explanation-the-database-layer" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-the-database-layer">Explanation: The Database Layer</h3>
+<ul>
+<li><strong><strong>init</strong>:</strong> Initializes the database with three dictionaries: customers, orders, and tickets. It also calls _init_sample_data() to populate the database with some initial data.</li>
+<li><strong>get_customer:</strong> Retrieves a customer by customer_id. If the customer is not found, it raises a ModelRetry exception. This is how pydantic-ai handles function calling that does not find a response.</li>
+<li><strong>get_orders:</strong> Retrieves all orders for a given customer_id. Returns an empty list if no orders are found.</li>
+<li><strong>get_tickets:</strong> Retrieves all support tickets for a given customer_id. Returns an empty list if no tickets are found.</li>
+<li><strong>create_ticket:</strong> Creates a new support ticket. It checks if the customer_id is valid before creating the ticket.</li>
+<li>**<em>init_sample_data:** Populates the database with sample data for testing purposes. This includes a customer, some orders, and a support ticket. This method is prefixed with an underscore (</em>) to indicate that it’s a private method intended for internal use within the class.</li>
+<li><strong>ModelRetry Exception:</strong> The use of the ModelRetry exception allows the agent to retry a function call if it fails. In the get_customer and create_ticket functions, the ModelRetry is raised if the user cannot be found in the system. This is useful in cases where the agent may hallucinate data that does not exist in the real world.</li>
+</ul>
+</section>
+</section>
+<section id="building-the-agent-tools" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-agent-tools">4. Building the Agent Tools</h2>
+<p>Now, let’s define the agent and equip it with tools to interact with our simulated database.</p>
+<div id="cell-16" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CustomerServiceDeps:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    customer_id: <span class="bu">int</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    db: CustomerServiceDatabase</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CustomerServiceResult(BaseModel):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    customer_id: <span class="bu">int</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    customer_info: Customer <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    orders: List[Order] <span class="op">=</span> Field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    tickets: List[SupportTicket] <span class="op">=</span> Field(default_factory<span class="op">=</span><span class="bu">list</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    message: <span class="bu">str</span> <span class="op">=</span> Field(default<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-17" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the customer service agent</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>customer_service_agent <span class="op">=</span> Agent(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>model,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    deps_type<span class="op">=</span>CustomerServiceDeps,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    result_type<span class="op">=</span>CustomerServiceResult,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    retries<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    system_prompt<span class="op">=</span><span class="st">"""You are a customer service assistant with access to customer data, </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">    orders, and support tickets. Help customers by providing accurate information and </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    creating support tickets when needed."""</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define agent tools</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">@customer_service_agent.tool</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> get_customer_info(ctx: RunContext[CustomerServiceDeps]) <span class="op">-&gt;</span> Customer:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch customer information based on their ID."""</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> ctx.deps.db.get_customer(ctx.deps.customer_id)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">@customer_service_agent.tool</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> get_customer_orders(ctx: RunContext[CustomerServiceDeps]) <span class="op">-&gt;</span> List[Order]:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch all orders for a customer."""</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> ctx.deps.db.get_orders(ctx.deps.customer_id)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">@customer_service_agent.tool</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> get_support_tickets(ctx: RunContext[CustomerServiceDeps]) <span class="op">-&gt;</span> List[SupportTicket]:</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetch all support tickets for a customer."""</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> ctx.deps.db.get_tickets(ctx.deps.customer_id)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">@customer_service_agent.tool</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> create_support_ticket(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    ctx: RunContext[CustomerServiceDeps],</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    subject: <span class="bu">str</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    description: <span class="bu">str</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    priority: Literal[<span class="st">'low'</span>, <span class="st">'medium'</span>, <span class="st">'high'</span>, <span class="st">'urgent'</span>],</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    order_id: <span class="bu">int</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> SupportTicket:</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create a new support ticket for the customer."""</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    ticket <span class="op">=</span> SupportTicket(</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        ticket_id<span class="op">=</span><span class="bu">len</span>(ctx.deps.db.tickets.get(ctx.deps.customer_id, [])) <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        customer_id<span class="op">=</span>ctx.deps.customer_id,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        order_id<span class="op">=</span>order_id,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        subject<span class="op">=</span>subject,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        description<span class="op">=</span>description,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        status<span class="op">=</span><span class="st">'open'</span>,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        priority<span class="op">=</span>priority,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        created_date<span class="op">=</span>date.today()</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> ctx.deps.db.create_ticket(ticket)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="explanation-agent-definition-and-tools" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-agent-definition-and-tools">Explanation: Agent Definition and Tools</h3>
+<ol type="1">
+<li><strong>CustomerServiceDeps:</strong> This dataclass holds the dependencies required by the agent. In this case, it needs a customer_id and a CustomerServiceDatabase instance.</li>
+<li><strong>CustomerServiceResult:</strong> This Pydantic model defines the structure of the data that the agent will return. It includes the customer_id, optional customer_info, a list of orders, a list of tickets, and a message field to return a response to the user. Using a Pydantic model for the results gives the LLM a schema to follow.</li>
+<li><strong>Agent:</strong> The <code>Agent</code> class from <code>pydantic-ai</code> is the core component.
+<ul>
+<li>model: Specifies the LLM to use (in this case, the <code>OpenAIModel</code> instance we created earlier).</li>
+<li>deps_type: Specifies the type of dependencies the agent needs (defined by CustomerServiceDeps).</li>
+<li>result_type: Specifies the type of the result that the agent will return (defined by CustomerServiceResult).</li>
+<li>retries: Sets the number of times the agent will retry a tool if it fails.</li>
+<li>system_prompt: A crucial part of agent design. This prompt instructs the LLM on its role, capabilities, and how it should behave. <em>A well-crafted system prompt is essential for getting the desired behavior from the agent.</em></li>
+</ul></li>
+<li><strong><span class="citation" data-cites="customer_service_agent.tool">@customer_service_agent.tool</span>:</strong> This decorator registers a function as a tool that the agent can use.
+<ul>
+<li><strong>get_customer_info:</strong> Fetches customer information from the database.</li>
+<li><strong>get_customer_orders:</strong> Fetches all orders for a customer.</li>
+<li><strong>get_support_tickets:</strong> Fetches all support tickets for a customer.</li>
+<li><strong>create_support_ticket:</strong> Creates a new support ticket. It takes subject, description, and priority as arguments. The order_id is optional. The ticket_id is automatically generated based on the number of existing tickets for the customer.</li>
+</ul></li>
+<li><strong>RunContext:</strong> Each tool function receives a RunContext object that provides access to the agent’s dependencies (<code>ctx.deps</code>) and other information about the current run.</li>
+<li><strong>Docstrings:</strong> The docstrings for each tool are <em>critical</em>. <code>pydantic-ai</code> uses these docstrings to tell the LLM what the tool does. Make them clear and concise.</li>
+<li><strong>Tool Parameters:</strong> The parameters specified in the create_support_ticket function are passed to the LLM. This enables the LLM to use the tool effectively.</li>
+<li><strong>Return Type Annotations:</strong> Make sure to add type annotations so that the model understands the data the function returns.</li>
+</ol>
+</section>
+</section>
+<section id="orchestrating-customer-inquiries-with-handle_customer_inquiry" class="level2">
+<h2 class="anchored" data-anchor-id="orchestrating-customer-inquiries-with-handle_customer_inquiry">5. Orchestrating Customer Inquiries with handle_customer_inquiry</h2>
+<p>The handle_customer_inquiry function is responsible for taking a customer inquiry and routing it to the agent.</p>
+<div id="cell-21" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> handle_customer_inquiry(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    customer_id: <span class="bu">int</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    inquiry: <span class="bu">str</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    db: CustomerServiceDatabase</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> CustomerServiceResult:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    deps <span class="op">=</span> CustomerServiceDeps(customer_id<span class="op">=</span>customer_id, db<span class="op">=</span>db)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> <span class="cf">await</span> customer_service_agent.run(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            inquiry,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            deps<span class="op">=</span>deps</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result.data <span class="co"># Access the data attribute</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> ValidationError <span class="im">as</span> e:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Validation error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> ModelRetry <span class="im">as</span> e:</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Retryable error: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="explanation-handling-customer-inquiries" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-handling-customer-inquiries">Explanation: Handling Customer Inquiries</h3>
+<ol type="1">
+<li><strong>Dependencies:</strong> Creates an instance of <code>CustomerServiceDeps</code> with the provided <code>customer_id</code> and <code>db</code>.</li>
+<li><strong><code>agent.run</code>:</strong> Calls the <code>run</code> method on the <code>customer_service_agent</code> to process the inquiry. It passes the inquiry string and the dependencies.</li>
+<li><strong>Error Handling:</strong>
+<ul>
+<li><strong><code>ValidationError</code>:</strong> Catches Pydantic validation errors that may occur during the agent’s execution. This could happen if the LLM returns data that doesn’t conform to the expected Pydantic models.</li>
+<li><strong><code>ModelRetry</code>:</strong> Catches <code>ModelRetry</code> exceptions that are raised by the database layer if a customer is not found or if there’s an issue creating a ticket.</li>
+<li><strong><code>Exception</code>:</strong> A catch-all for any other exceptions that might occur. <em>It’s generally good practice to catch specific exceptions rather than a broad <code>Exception</code> to handle errors more precisely.</em></li>
+</ul></li>
+<li><strong>Returns <code>CustomerServiceResult</code>:</strong> Returns the <code>CustomerServiceResult</code> object containing the agent’s response. The LLM will call the tools and the function returns the result.</li>
+</ol>
+</section>
+</section>
+<section id="putting-it-all-together-running-a-customer-inquiry" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together-running-a-customer-inquiry">6. Putting it All Together: Running a Customer Inquiry</h2>
+<p>Let’s create an instance of our database and simulate a customer inquiry.</p>
+<div id="cell-24" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> asyncio</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> CustomerServiceDatabase()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example customer inquiry</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>inquiry <span class="op">=</span> <span class="st">"I'd like to know the status of my recent orders and if there are any open support tickets."</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> run_inquiry():</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        deps <span class="op">=</span> CustomerServiceDeps(customer_id<span class="op">=</span><span class="dv">1</span>, db<span class="op">=</span>db)  <span class="co"># Create dependencies</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> <span class="cf">await</span> handle_customer_inquiry(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            customer_id<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            inquiry<span class="op">=</span>inquiry,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            db<span class="op">=</span>db</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Customer Info: </span><span class="sc">{</span>result<span class="sc">.</span>customer_info<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Orders: </span><span class="sc">{</span>result<span class="sc">.</span>orders<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Tickets: </span><span class="sc">{</span>result<span class="sc">.</span>tickets<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Response: </span><span class="sc">{</span>result<span class="sc">.</span>message<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error handling inquiry: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the asynchronous function</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>asyncio.run(run_inquiry())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Customer Info: id=1 name='Alice Smith' email='alice.smith@example.com' join_date=datetime.date(2024, 1, 15)
+Orders: [Order(order_id=101, customer_id=1, items=[OrderItem(item_id=201, name='Laptop', quantity=1, price=1200.0)], total=1200.0, status='shipped', order_date=datetime.date(2024, 11, 10)), Order(order_id=102, customer_id=1, items=[OrderItem(item_id=202, name='Keyboard', quantity=1, price=75.0)], total=75.0, status='delivered', order_date=datetime.date(2024, 11, 15))]
+Tickets: [SupportTicket(ticket_id=301, customer_id=1, order_id=101, subject='Shipping Issue', description='Laptop never arrived', status='open', priority='high', created_date=datetime.date(2024, 12, 1))]
+Response: </code></pre>
+</div>
+</div>
+<section id="explanation-running-the-inquiry" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-running-the-inquiry">Explanation: Running the Inquiry</h3>
+<ol type="1">
+<li><strong>Create Database Instance:</strong> Creates an instance of the <code>CustomerServiceDatabase</code>.</li>
+<li><strong>Define Inquiry:</strong> Defines a sample customer inquiry.</li>
+<li><strong><code>async run_inquiry()</code>:</strong> This function encapsulates the asynchronous operations.</li>
+<li><strong>Call <code>handle_customer_inquiry</code>:</strong> Calls the <code>handle_customer_inquiry</code> function with the customer ID, inquiry, and database instance.</li>
+<li><strong>Print Results:</strong> Prints the customer information, orders, tickets, and the agent’s response.</li>
+<li><strong>Error Handling:</strong> Catches any exceptions that occur during the process and prints an error message.</li>
+</ol>
+</section>
+</section>
+<section id="error-handling-and-validation" class="level2">
+<h2 class="anchored" data-anchor-id="error-handling-and-validation">6. Error Handling and Validation</h2>
+<p>The agent includes built-in error handling for common scenarios: - Invalid customer IDs - Missing orders or tickets - Validation errors in data models - Retry logic for transient failures</p>
+</section>
+<section id="testing-the-agent" class="level2">
+<h2 class="anchored" data-anchor-id="testing-the-agent">7. Testing the Agent</h2>
+<p>Here’s a basic test suite for our customer service agent: Testing is crucial to ensure the reliability of your agent. Here’s a basic test suite to verify some core functionalities. <em>Note: This requires you to have <code>pytest</code> and <code>pytest-asyncio</code> installed.</em></p>
+<div id="cell-28" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">@pytest.mark.asyncio</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> test_customer_lookup():</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    db <span class="op">=</span> CustomerServiceDatabase()</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add test customer</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    db.customers[<span class="dv">1</span>] <span class="op">=</span> Customer(</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">id</span><span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span><span class="st">"Test Customer"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        email<span class="op">=</span><span class="st">"test@example.com"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        join_date<span class="op">=</span>date.today()</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="cf">await</span> handle_customer_inquiry(</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        customer_id<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        inquiry<span class="op">=</span><span class="st">"What is my customer information?"</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        db<span class="op">=</span>db</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result.customer_info <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result.customer_info.<span class="bu">id</span> <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="at">@pytest.mark.asyncio</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> test_order_lookup():</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    db <span class="op">=</span> CustomerServiceDatabase()</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add test order</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    db.orders[<span class="dv">1</span>] <span class="op">=</span> [</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        Order(</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>            order_id<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>            customer_id<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>            items<span class="op">=</span>[</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                OrderItem(</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                    item_id<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>                    name<span class="op">=</span><span class="st">"Test Item"</span>,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>                    quantity<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>                    price<span class="op">=</span><span class="fl">99.99</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>            total<span class="op">=</span><span class="fl">99.99</span>,</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">"shipped"</span>,</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>            order_date<span class="op">=</span>date.today()</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="cf">await</span> handle_customer_inquiry(</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>        customer_id<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>        inquiry<span class="op">=</span><span class="st">"What are my recent orders?"</span>,</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>        db<span class="op">=</span>db</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(result.orders) <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result.orders[<span class="dv">0</span>].order_id <span class="op">==</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="explanation-testing-the-agent" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-testing-the-agent">Explanation: Testing the Agent</h3>
+<ol type="1">
+<li><strong><span class="citation" data-cites="pytest.mark.asyncio">@pytest.mark.asyncio</span>:</strong> This decorator marks the test functions as asynchronous, allowing you to use await inside them. <em>This is essential for testing asynchronous code.</em></li>
+<li><strong>test_customer_lookup:</strong> This test verifies that the agent can correctly retrieve customer information.
+<ul>
+<li>It creates a new CustomerServiceDatabase instance.</li>
+<li>It adds a test customer to the database.</li>
+<li>It calls handle_customer_inquiry with a query asking for customer information.</li>
+<li>It asserts that the customer_info field in the result is not None and that the customer ID matches the expected value.</li>
+</ul></li>
+<li><strong>test_order_lookup:</strong> This test verifies that the agent can correctly retrieve customer orders.
+<ul>
+<li>It creates a new CustomerServiceDatabase instance.</li>
+<li>It adds a test order to the database.</li>
+<li>It calls handle_customer_inquiry with a query asking for recent orders.</li>
+<li>It asserts that the orders list in the result is not empty and that the order ID of the first order matches the expected value.</li>
+</ul></li>
+</ol>
+<p>This tutorial has demonstrated how to build an intelligent customer service agent using <code>pydantic-ai</code> and LLMs. By leveraging Pydantic’s type safety and the power of LLMs, you can create robust, reliable, and intelligent customer service solutions. This example provides a strong foundation for building more complex and sophisticated agents that can automate a wide range of customer service tasks. Remember to refine your system prompt, add more tools, and implement comprehensive testing to build a production-ready solution.</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/e-landeros\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-landeros">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/e_landeros_">
+      <i class="bi bi-twitter-x" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/flanderos">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.kaggle.com/elanderos">
+      <i class="bi bi-graph-up" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <a href="https://quarto.org/">Quarto</a> © 2023 Fabian Landeros</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
