@@ -12,7 +12,7 @@ about:
       href: https://x.com/e_landeros_
     - icon: linkedin
       text: LinkedIn
-      href: https://www.linkedin.com/in/e_landeros_
+      href: https://www.linkedin.com/in/flanderos
     - icon: graph-up
       text: Kaggle
       href: https://www.kaggle.com/elanderos
@@ -31,8 +31,7 @@ learn, and I write down what I learn while building them.
 ## What I work on
 
 **Agents and LLM systems.** Retrieval-augmented applications, agent design
-patterns, and evaluation harnesses — mostly in Python with PydanticAI, LangChain,
-and smolagents.
+patterns, and evaluation harnesses — mostly in Python with PydanticAI.
 
 **Reinforcement learning.** Bandits, MDPs, and Bellman equations. Watching an
 agent learn by trial and error is still the most interesting thing I get to do.
@@ -46,16 +45,9 @@ details that make them survive real inputs.
 
 ## Tools I reach for
 
-- **Languages:** Python, JavaScript, Go, Mojo
-- **ML:** PyTorch, scikit-learn, Hugging Face, NLTK, spaCy, LightGBM
+- **Languages:** Python, JavaScript
+- **ML:** PyTorch, scikit-learn, Hugging Face, XGBoost, LightGBM
 - **Agents:** PydanticAI, smolagents, LangChain
 - **Data:** pandas, NumPy, SQL, Snowflake, MongoDB
 - **Viz:** matplotlib, seaborn, plotly, Looker
 - **Serving:** FastAPI, Flask, Django, Docker
-- **Editor:** VS Code, Jupyter, Cursor
-
-## Working together
-
-I take on free consulting for non-profits working on climate and for people
-rescuing dogs. If you're hiring AI engineers and the process feels broken — it
-usually is — just send me a message and let's talk about the work itself.
