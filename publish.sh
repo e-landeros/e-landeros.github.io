@@ -28,6 +28,9 @@ quarto render
 # GitHub Pages must not run the output through Jekyll.
 touch _site/.nojekyll
 
+# Quarto mirrors the project's .venv into _site; it has no business being public.
+rm -rf _site/.venv
+
 if [ -e "_site/.env" ]; then
   echo "error: .env leaked into _site" >&2
   exit 1
