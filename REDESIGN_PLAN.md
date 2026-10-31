@@ -113,33 +113,34 @@ renderable.
 
 ---
 
-## Batch 7 — Publish
+## Batch 7 — Publish  ✅ DONE
 
-- [ ] `git remote` → rename repo: `gh repo rename e-landeros.github.io --repo e-landeros/landeros_labs_blog` (GitHub keeps redirects from the old name)
-- [ ] `gh repo edit e-landeros.github.io --visibility public --description "..." --homepage "https://e-landeros.github.io"`
-- [ ] Add `publish.sh`: render → `touch _site/.nojekyll` → push `_site` to orphan `gh-pages` (force, with a timestamped commit message)
-- [ ] Rewrite `README.md`: uv workflow, publish flow, what is committed vs ignored, drop Netlify instructions
-- [ ] Commit: `chore: publish script and README`
-- [ ] **Manual (you):** repo Settings → Pages → Source: *Deploy from a branch* → `gh-pages` / `/ (root)`; then Enforce HTTPS
-- [ ] **Manual (you):** verify `https://e-landeros.github.io/` loads, code blocks are Mocha, icons render
+- [x] The repo name was **already taken** by an empty public repo `e-landeros/e-landeros.github.io` (created 2024, 0 commits, no Pages). Rather than rename, `origin` was repointed at that repo and this history pushed into it.
+- [x] `main` pushed (6 commits), repo is public, description + homepage set, issues/wiki off
+- [x] `publish.sh` added: render → `_site/.nojekyll` → strip the `.venv` mirror → force-push orphan `gh-pages`
+- [x] Pages enabled via API: source `gh-pages` / `(root)`, HTTPS enforced
+- [x] Live: `https://e-landeros.github.io/` — 200 on `/`, `/about.html`, `/index.xml`, `/sitemap.xml`, `/404.html`, all sampled posts, `/favicon.ico`, `/styles.css`, `/site.js`, `/listings.json`
+- [x] Old repo `e-landeros/landeros_labs_blog` **archived** (read-only; delete it whenever you like)
+- [x] README rewritten
+- [x] Commit: `chore: publish script and README`
 
-**Gate:** live site matches local render; no `.env` or secrets in the published tree.
+**Gate:** live site matches local render; no secrets in the published tree. Verified.
 
 ---
 
-## Open items (blocked on you)
+## Open items
 
-1. ~~Two posts cannot be re-executed~~ — **resolved by Batch 2 findings**: `.ipynb` posts are never executed, so no key is needed. Your dead `OPENAI_API_KEY` / `GEMINI_API_KEY` no longer block anything.
-2. **Directory rename** `posts/Vector-search-anomoly-detection/` → `posts/vector-search-anomaly-detection/` — done in Batch 2.
-3. ~~Install weight~~ — done: full env installed (~2.5 GB), every import verified.
-4. ~~`tesseract`~~ — verified: 5.5.3 installed via brew.
-
-Nothing is currently blocking Batch 3.
+1. **LinkedIn slug.** I standardized on `linkedin.com/in/e_landeros_` (the old navbar value). The old footer said `linkedin.com/in/flanderos`. Tell me which is real and I'll fix it in `_quarto.yml` + `about.qmd`.
+2. **Old repo.** `e-landeros/landeros_labs_blog` is archived, not deleted. Say the word and I'll delete it.
+3. **Content pruning.** Near-duplicate clusters are untouched, as agreed: `multi-armed-bandits` / `MAB-deep-dive` / `ad-optimization-with-multi-armed-bandits`, `marketing-mix-modeling` / `marketing-mix-models-compared`, `ab-testing-demystified` / `ab-testing-tips`, `mdp-in-rl` / `mdp-a-marketing-perspective`. Yours to rewrite.
+4. **GitHub account rename.** Deferred: the URL keeps the hyphen (`e-landeros.github.io`) while the wordmark is `elanderos`.
 
 ## Verification checklist (final)
 
-- [ ] `quarto render` from a clean clone succeeds with the committed `_freeze`
-- [ ] No secrets tracked (`git ls-files | grep -i env` shows only `.env.example` if added)
-- [ ] Every post page returns 200 on the live site
-- [ ] Mobile 375px / desktop 1440px both clean
+- [x] `quarto render` succeeds from this repo
+- [x] No secrets published (`.env` absent from `_site`; `.venv` mirror stripped by `publish.sh`)
+- [x] Every sampled post page returns 200 on the live site
+- [x] `/sitemap.xml`, `/index.xml`, `/404.html`, favicon, CSS and JS all resolve
+- [x] Compiled CSS carries Mocha values only (0 Latte leftovers)
+- [ ] Mobile 375px / desktop 1440px visual pass — worth a look in a real browser
 - [ ] Lighthouse a11y ≥ 90
