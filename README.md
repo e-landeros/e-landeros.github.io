@@ -1,28 +1,74 @@
-# Personal Blog on AI
+# elanderos
 
-Welcome to my personal blog on AI! This blog is a fun project where I share my thoughts, insights, and experiences related to artificial intelligence. It's a space for exploration and learning, and I hope you find it as enjoyable to read as it is for me to create.
+Source for **[e-landeros.github.io](https://e-landeros.github.io/)** — a Quarto
+blog about AI, data, and the things I build. Dark Catppuccin Mocha theme, IDE-style
+iconography.
 
-## About Quarto
+## Stack
 
-Quarto is an open-source scientific and technical publishing system built on Pandoc. It allows you to create dynamic documents, reports, presentations, and websites. Quarto is particularly useful for creating blogs and websites with a focus on data science and technical content.
+- [Quarto](https://quarto.org/) 1.10 for the site build
+- [uv](https://docs.astral.sh/uv/) for the Python environment
+- GitHub Pages (served from the `gh-pages` branch)
 
-## Building and Running the Blog Locally
-
-To build and run the blog locally, you can use the following commands:
-
-```bash
-# Install Quarto if you haven't already
-brew install quarto
-
-# Render the site
-quarto render
-
-# Serve the site locally
-quarto serve
-```
-
-## Deploying to Netlify
+## Setup
 
 ```bash
-quarto publish netlify
+brew install quarto tesseract
+uv sync
 ```
+
+`tesseract` is required by `pytesseract` in the OCR posts; `uv sync` installs the
+notebook dependencies (torch, pymc, easyocr, …) which is a multi-GB download.
+
+## Preview
+
+```bash
+export QUARTO_PYTHON="$PWD/.venv/bin/python"
+quarto preview
+```
+
+`QUARTO_PYTHON` is required — without it Quarto will not find the project
+environment.
+
+## Publishing
+
+```bash
+./publish.sh
+```
+
+The script renders the site, writes `_site/.nojekyll`, and force-pushes the output
+to an orphan `gh-pages` branch on `origin`. There is no CI: publishing happens from
+this machine.
+
+First-time setup on GitHub (one manual step): repository **Settings → Pages →
+Deploy from a branch → `gh-pages` / `(root)`**, then enable **Enforce HTTPS**.
+
+## How content builds
+
+- **`.ipynb` posts are never executed.** Quarto renders the outputs already stored
+  in the notebook. No API keys or kernels are needed for them.
+- **`.qmd` posts execute** against the uv environment. Their results are cached in
+  `_freeze/`, which is committed, so repeat renders are cache hits.
+- If a `.qmd` post needs an API key, put it in a gitignored `.env` at the repo root
+  (`python-dotenv` loads it) and re-render that post to refresh its freeze cache.
+
+## What is ignored
+
+`.env`, `.venv/`, `_site/`, `.quarto/`, `.DS_Store`, `**/*.quarto_ipynb`,
+`__pycache__/`.
+
+## Layout
+
+```
+_quarto.yml               site config (theme, nav, feed, social cards)
+theme/                    Catppuccin Mocha SCSS + Pandoc syntax theme + head include
+styles.css                hero, about, 404, icon accents
+site.js                   category icon tagging + hero animation
+posts/                    blog posts (.qmd and .ipynb)
+_freeze/                  execution cache for .qmd posts
+publish.sh                build + publish to gh-pages
+```
+
+## Credits
+
+Catppuccin palette: [catppuccin/catppuccin](https://github.com/catppuccin/catppuccin).
