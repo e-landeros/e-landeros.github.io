@@ -1,5 +1,8 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "posts"
 
 website:
   google-analytics: G-8BJ08S4YXX

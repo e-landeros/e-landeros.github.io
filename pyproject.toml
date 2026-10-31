@@ -1,0 +1,48 @@
+[project]
+name = "elanderos-blog"
+version = "0.1.0"
+description = "Source for e-landeros.github.io"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "ipykernel",
+    "jupyter",
+    "nbclient",
+    "pyyaml",
+    # analysis / plotting used across posts
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn",
+    "statsmodels",
+    "plotly",
+    "networkx",
+    "sortedcontainers",
+    # deep learning
+    "torch",
+    "torchvision",
+    "tensorboard",
+    # agents / llm
+    "pydantic",
+    "pydantic-ai",
+    "python-dotenv",
+    "nest-asyncio",
+    "ollama",
+    # vision / ocr
+    "opencv-python-headless",
+    "pillow",
+    "pytesseract",
+    "easyocr",
+    # probabilistic programming / retrieval / web
+    "pymc",
+    "faiss-cpu",
+    "flask",
+    "requests",
+    "faker",
+]
+
+[tool.uv]
+# notebooks are executed by Quarto against this environment
+package = false
