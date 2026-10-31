@@ -33,14 +33,12 @@ website:
 
 format:
   html:
-    theme: cyborg
+    theme:
+      - darkly
+      - theme/catppuccin-mocha.scss
     css: styles.css
     page-layout: full
+    code-block-bg: true
+    code-block-border-left: "#cba6f7"
 
-syntax-highlighting: one-dark-catppuccin-latte.theme
-code-block-bg: true
-code-block-border-left: "#31BAE9"
-
-output:
-  ipynb:
-    theme: red
+syntax-highlighting: theme/catppuccin-mocha.theme

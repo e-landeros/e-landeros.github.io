@@ -1,0 +1,429 @@
+/*-- scss:defaults --*/
+
+// ─── Catppuccin Mocha ──────────────────────────────────────────────────────
+// https://github.com/catppuccin/catppuccin — palette values are canonical.
+$ctp-crust: #11111b;
+$ctp-mantle: #181825;
+$ctp-base: #1e1e2e;
+$ctp-surface0: #313244;
+$ctp-surface1: #45475a;
+$ctp-surface2: #585b70;
+$ctp-overlay0: #6c7086;
+$ctp-overlay1: #7f849c;
+$ctp-overlay2: #9399b2;
+$ctp-subtext0: #a6adc8;
+$ctp-subtext1: #bac2de;
+$ctp-text: #cdd6f4;
+$ctp-lavender: #b4befe;
+$ctp-blue: #89b4fa;
+$ctp-sapphire: #74c7ec;
+$ctp-sky: #89dceb;
+$ctp-teal: #94e2d5;
+$ctp-green: #a6e3a1;
+$ctp-yellow: #f9e2af;
+$ctp-peach: #fab387;
+$ctp-maroon: #eba0ac;
+$ctp-red: #f38ba8;
+$ctp-mauve: #cba6f7;
+$ctp-pink: #f5c2e7;
+
+// ─── Bootstrap / Quarto variables ─────────────────────────────────────────
+$body-bg: $ctp-base;
+$body-color: $ctp-text;
+$body-secondary-color: $ctp-subtext0;
+$body-emphasis-color: $ctp-subtext1;
+
+$primary: $ctp-mauve;
+$secondary: $ctp-blue;
+$success: $ctp-green;
+$info: $ctp-sky;
+$warning: $ctp-yellow;
+$danger: $ctp-red;
+$light: $ctp-surface1;
+$dark: $ctp-crust;
+
+$link-color: $ctp-blue;
+$link-hover-color: $ctp-lavender;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$headings-color: $ctp-text;
+$headings-font-weight: 650;
+$h1-font-size: 2.1rem;
+$h2-font-size: 1.6rem;
+$h3-font-size: 1.3rem;
+
+$border-color: $ctp-surface1;
+$border-radius: 0.5rem;
+
+$font-family-monospace: "JetBrains Mono", "Fira Code", "SFMono-Regular", Menlo, Consolas, monospace;
+
+$code-color: $ctp-green;
+$code-bg: $ctp-surface0;
+$code-block-bg: $ctp-mantle;
+$code-block-border-left: $ctp-mauve;
+$code-block-border-left-style: solid;
+$code-block-border-left-size: 3px;
+$code-block-padding: 0.9rem;
+
+$navbar-bg: $ctp-crust;
+$navbar-fg: $ctp-subtext1;
+$navbar-hl: $ctp-mauve;
+
+$footer-bg: $ctp-crust;
+$footer-fg: $ctp-overlay2;
+
+$sidebar-bg: $ctp-mantle;
+$sidebar-fg: $ctp-subtext0;
+$sidebar-hl: $ctp-mauve;
+
+$toc-color: $ctp-subtext0;
+
+$table-color: $ctp-text;
+$table-border-color: $ctp-surface1;
+$table-striped-bg: rgba(49, 50, 68, 0.55);
+$table-hover-bg: rgba(69, 71, 90, 0.6);
+
+$input-bg: $ctp-surface0;
+$input-color: $ctp-text;
+$input-border-color: $ctp-surface2;
+$input-placeholder-color: $ctp-overlay1;
+
+$card-bg: $ctp-mantle;
+$card-border-color: $ctp-surface1;
+$card-cap-bg: $ctp-surface0;
+
+$dropdown-bg: $ctp-mantle;
+$dropdown-link-color: $ctp-text;
+$dropdown-link-hover-bg: $ctp-surface0;
+$dropdown-border-color: $ctp-surface1;
+
+$modal-content-bg: $ctp-mantle;
+$modal-content-border-color: $ctp-surface1;
+
+$popover-bg: $ctp-mantle;
+$popover-border-color: $ctp-surface1;
+
+$nav-tabs-border-color: $ctp-surface1;
+$nav-tabs-link-active-bg: $ctp-surface0;
+$nav-tabs-link-active-color: $ctp-mauve;
+
+$pagination-bg: $ctp-surface0;
+$pagination-border-color: $ctp-surface1;
+$pagination-color: $ctp-subtext1;
+$pagination-hover-bg: $ctp-surface1;
+
+/*-- scss:rules --*/
+
+// ─── Global chrome ────────────────────────────────────────────────────────
+::selection {
+  background: rgba(203, 166, 247, 0.35);
+  color: $ctp-text;
+}
+
+body {
+  background-color: $ctp-base;
+}
+
+.navbar {
+  border-bottom: 1px solid $ctp-surface0;
+  font-size: 0.95rem;
+
+  .navbar-brand {
+    color: $ctp-mauve;
+    font-family: $font-family-monospace;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-link {
+    color: $ctp-subtext1;
+
+    &:hover,
+    &:focus {
+      color: $ctp-lavender;
+    }
+  }
+}
+
+.navbar .navbar-nav .nav-link.active {
+  color: $ctp-mauve;
+}
+
+// Icon glyphs in the navbar and footer are font glyphs, so `color` recolors them.
+.navbar .bi,
+#quarto-header .bi,
+.nav-footer .bi,
+.page-footer .bi {
+  transition: color 0.15s ease;
+}
+
+.nav-footer,
+.footer {
+  border-top: 1px solid $ctp-surface0;
+  color: $ctp-overlay2;
+  font-size: 0.9rem;
+
+  a {
+    color: $ctp-subtext0;
+
+    &:hover {
+      color: $ctp-mauve;
+    }
+  }
+}
+
+// ─── Sidebar / TOC ────────────────────────────────────────────────────────
+#quarto-margin-sidebar,
+.sidebar {
+  background-color: transparent;
+}
+
+.sidebar-title,
+.quarto-listing-category-title,
+#TOC > h2 {
+  color: $ctp-overlay2;
+  font-family: $font-family-monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#TOC a {
+  color: $ctp-subtext0;
+
+  &:hover,
+  &.active {
+    color: $ctp-mauve;
+  }
+}
+
+// ─── Code ─────────────────────────────────────────────────────────────────
+div.sourceCode,
+pre.sourceCode {
+  background-color: $ctp-mantle;
+  color: $ctp-text;
+}
+
+div.sourceCode {
+  border: 1px solid $ctp-surface0;
+  border-left: 3px solid $ctp-mauve;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 0 rgba(17, 17, 27, 0.6);
+}
+
+div.sourceCode pre.sourceCode,
+pre.sourceCode code {
+  background: transparent;
+}
+
+pre.sourceCode {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+code:not(.sourceCode) {
+  background-color: $ctp-surface0;
+  color: $ctp-green;
+  padding: 0.1em 0.35em;
+  border-radius: 0.3rem;
+  font-size: 0.9em;
+}
+
+kbd {
+  background-color: $ctp-surface1;
+  color: $ctp-text;
+  border: 1px solid $ctp-surface2;
+  box-shadow: none;
+}
+
+// line numbers in code blocks
+.code-with-filename .code-with-filename-file {
+  background-color: $ctp-surface0;
+  color: $ctp-subtext1;
+  border: 1px solid $ctp-surface1;
+  border-bottom: none;
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+}
+
+// ─── Tables ───────────────────────────────────────────────────────────────
+.table {
+  --bs-table-color: #{$ctp-text};
+  --bs-table-bg: transparent;
+  --bs-table-border-color: #{$ctp-surface1};
+  --bs-table-striped-bg: #{rgba($ctp-surface0, 0.55)};
+  --bs-table-striped-color: #{$ctp-text};
+  --bs-table-hover-bg: #{rgba($ctp-surface1, 0.5)};
+  font-size: 0.92rem;
+
+  thead th {
+    color: $ctp-lavender;
+    border-bottom: 2px solid $ctp-surface2;
+  }
+}
+
+// ─── Callouts ─────────────────────────────────────────────────────────────
+.callout {
+  border-radius: 0.5rem;
+  border: 1px solid $ctp-surface1;
+  background-color: $ctp-mantle;
+}
+
+.callout-note {
+  border-left: 3px solid $ctp-blue;
+}
+
+.callout-tip {
+  border-left: 3px solid $ctp-teal;
+}
+
+.callout-warning {
+  border-left: 3px solid $ctp-yellow;
+}
+
+.callout-important,
+.callout-caution {
+  border-left: 3px solid $ctp-red;
+}
+
+// ─── Blockquote ───────────────────────────────────────────────────────────
+blockquote {
+  border-left: 3px solid $ctp-surface2;
+  color: $ctp-subtext1;
+  padding-left: 1rem;
+}
+
+// ─── Listing cards ────────────────────────────────────────────────────────
+.quarto-post {
+  background-color: $ctp-mantle;
+  border: 1px solid $ctp-surface0;
+  border-radius: 0.6rem;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: $ctp-mauve;
+  }
+
+  .listing-title a {
+    color: $ctp-text;
+
+    &:hover {
+      color: $ctp-mauve;
+    }
+  }
+
+  .listing-description,
+  .listing-description a {
+    color: $ctp-subtext0;
+  }
+
+  .listing-date,
+  .listing-author,
+  .listing-reading-time {
+    color: $ctp-overlay2;
+    font-family: $font-family-monospace;
+    font-size: 0.78rem;
+  }
+
+  .thumbnail-image {
+    border-radius: 0.4rem;
+    border: 1px solid $ctp-surface1;
+  }
+}
+
+.quarto-listing-default .quarto-post:last-child {
+  margin-bottom: 0;
+}
+
+// category chips (listing cards and the sidebar filter)
+.listing-category,
+.category {
+  background-color: $ctp-surface0;
+  color: $ctp-subtext1;
+  border: 1px solid $ctp-surface1;
+  border-radius: 999px;
+  font-family: $font-family-monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 0.12rem 0.55rem;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $ctp-mauve;
+    color: $ctp-mauve;
+  }
+}
+
+.quarto-category-count {
+  color: $ctp-overlay1;
+}
+
+// ─── Search ───────────────────────────────────────────────────────────────
+#quarto-search .aa-DetachedSearchButton,
+.aa-DetachedSearchButton {
+  background-color: $ctp-surface0;
+  border: 1px solid $ctp-surface1;
+  color: $ctp-subtext1;
+  border-radius: 0.4rem;
+}
+
+.aa-DetachedContainer {
+  background-color: $ctp-base;
+}
+
+.aa-DetachedFormContainer {
+  border-bottom: 1px solid $ctp-surface1;
+}
+
+.aa-Input {
+  background-color: $ctp-surface0;
+  color: $ctp-text;
+}
+
+.aa-SourceHeaderTitle,
+.aa-SourceHeaderLine {
+  color: $ctp-overlay2;
+}
+
+.aa-Item {
+  background-color: $ctp-mantle;
+  border: 1px solid $ctp-surface0;
+  border-radius: 0.4rem;
+}
+
+.aa-ItemContentTitle {
+  color: $ctp-text;
+}
+
+.aa-ItemContentDescription {
+  color: $ctp-subtext0;
+}
+
+// ─── Back to top ──────────────────────────────────────────────────────────
+#quarto-back-to-top {
+  background-color: $ctp-surface0;
+  border: 1px solid $ctp-surface1;
+  color: $ctp-subtext1;
+
+  &:hover {
+    border-color: $ctp-mauve;
+    color: $ctp-mauve;
+  }
+}
+
+// ─── Page title block ─────────────────────────────────────────────────────
+#title-block-header .quarto-title-meta,
+#title-block-header .quarto-categories {
+  color: $ctp-overlay2;
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+}
+
+.quarto-title-banner {
+  background-color: $ctp-mantle;
+  border-bottom: 1px solid $ctp-surface0;
+}
